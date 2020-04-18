@@ -7,7 +7,7 @@ let request = require("request");
 var config = require('../config/global');
 var connection = require('../config/connection');
 const BitlyClient = require('bitly').BitlyClient;
-const bitly = new BitlyClient('4a2fa0c1336a380de834a3b7324f6ebbd1da9039');
+const bitly = new BitlyClient('6050528e1d5594c2b447fe6b403f047c5f8e5dd6');
 var tall = require('tall').default;
 
 const axios = require('axios');
