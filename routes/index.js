@@ -14,12 +14,7 @@ const axios = require('axios');
 var textVersion = require("textversionjs");
 const cheerio = require('cheerio')
 var _ = require('underscore');
-const opHelper = new OperationHelper({
-  'awsId': 'AKIAJLFL6KDKK2CQOM3A',
-  'awsSecret': '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',
-  'assocId': 'kudrati-21',
-  'locale': 'IN'
-});
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -195,117 +190,117 @@ router.get('/telegram_posts', function (req, res, next) {
   })
 });
 
-router.get('/telegram_postss', function (req, res, next) {
-  async.waterfall([
-    function (nextCall) {
-      opHelper.execute('ItemSearch', {
-        'SearchIndex': 'All',
-        'Keywords': req.query.asin,
-        // 'ASIN': 'B07W184FS2',
-        'ItemPage': '1',
-        'ResponseGroup': 'ItemAttributes,Offers,OfferFull,Reviews,SearchBins,SalesRank,Images,Tracks,OfferListings,PromotionSummary,PromotionalTag,EditorialReview,VariationOffers,Variations'
-      }).then((response) => {
-        let productUrl = response.result.ItemSearchResponse.Items.Item[0].DetailPageURL ? response.result.ItemSearchResponse.Items.Item[0].DetailPageURL : response.result.ItemSearchResponse.Items.MoreSearchResultsUrl;
-        // let finalProductUrl = 'https://api.rebrandly.com/v1/links/new?Content-Type=application/json&apikey=4cac33db1c9140a8a9dfd6fa9f4c3510&destination=' + productUrl + '%2F&title=amzn&domain%5Bid%5D=07757180185b4e3da431e5f902b704c1&domain%5BfullName%5D=link.bestshoppingdeal.in';
+// router.get('/telegram_postss', function (req, res, next) {
+//   async.waterfall([
+//     function (nextCall) {
+//       opHelper.execute('ItemSearch', {
+//         'SearchIndex': 'All',
+//         'Keywords': req.query.asin,
+//         // 'ASIN': 'B07W184FS2',
+//         'ItemPage': '1',
+//         'ResponseGroup': 'ItemAttributes,Offers,OfferFull,Reviews,SearchBins,SalesRank,Images,Tracks,OfferListings,PromotionSummary,PromotionalTag,EditorialReview,VariationOffers,Variations'
+//       }).then((response) => {
+//         let productUrl = response.result.ItemSearchResponse.Items.Item[0].DetailPageURL ? response.result.ItemSearchResponse.Items.Item[0].DetailPageURL : response.result.ItemSearchResponse.Items.MoreSearchResultsUrl;
+//         // let finalProductUrl = 'https://api.rebrandly.com/v1/links/new?Content-Type=application/json&apikey=4cac33db1c9140a8a9dfd6fa9f4c3510&destination=' + productUrl + '%2F&title=amzn&domain%5Bid%5D=07757180185b4e3da431e5f902b704c1&domain%5BfullName%5D=link.bestshoppingdeal.in';
 
-        // console.log('response: ', response);
-        // res.send(finalProductUrl)
-        // debugger;
-        // https://api.rebrandly.com/v1/links/
-        // new?Content-Type=application/json&
-        // apikey=4cac33db1c9140a8a9dfd6fa9f4c3510&destination=DESTINATION_LINK%2F
-        // &title=amzn&domain%5Bid%5D=07757180185b4e3da431e5f902b704c1
-        // &domain%5BfullName%5D=link.bestshoppingdeal.in
+//         // console.log('response: ', response);
+//         // res.send(finalProductUrl)
+//         // debugger;
+//         // https://api.rebrandly.com/v1/links/
+//         // new?Content-Type=application/json&
+//         // apikey=4cac33db1c9140a8a9dfd6fa9f4c3510&destination=DESTINATION_LINK%2F
+//         // &title=amzn&domain%5Bid%5D=07757180185b4e3da431e5f902b704c1
+//         // &domain%5BfullName%5D=link.bestshoppingdeal.in
 
-        nextCall(null, productUrl);
-      }).catch((err) => {
-        console.error("Something went wrong! ", err);
-      })
-    },
-    function (body, nextCall) {
+//         nextCall(null, productUrl);
+//       }).catch((err) => {
+//         console.error("Something went wrong! ", err);
+//       })
+//     },
+//     function (body, nextCall) {
 
 
-      let requestHeaders1 = {
-        "Content-Type": "application/json",
-        "apikey": "4cac33db1c9140a8a9dfd6fa9f4c3510",
-        //  "workspace": "07757180185b4e3da431e5f902b704c1"
+//       let requestHeaders1 = {
+//         "Content-Type": "application/json",
+//         "apikey": "4cac33db1c9140a8a9dfd6fa9f4c3510",
+//         //  "workspace": "07757180185b4e3da431e5f902b704c1"
 
-      }
+//       }
 
-      let linkRequest1 = {
-        destination: body,
-        domain: { fullName: "link.bestshoppingdeal.in" },
-        "id": "07757180185b4e3da431e5f902b704c1",
-        // Content-Type: "application/json",
-        // apikey: "4cac33db1c9140a8a9dfd6fa9f4c3510",
-        //, slashtag: "A_NEW_SLASHTAG"
-        title: "amzn"
-      }
+//       let linkRequest1 = {
+//         destination: body,
+//         domain: { fullName: "link.bestshoppingdeal.in" },
+//         "id": "07757180185b4e3da431e5f902b704c1",
+//         // Content-Type: "application/json",
+//         // apikey: "4cac33db1c9140a8a9dfd6fa9f4c3510",
+//         //, slashtag: "A_NEW_SLASHTAG"
+//         title: "amzn"
+//       }
 
-      request({
-        uri: "https://api.rebrandly.com/v1/links",
-        method: "POST",
-        body: JSON.stringify(linkRequest1),
-        headers: requestHeaders1
-      }, (err, response, body) => {
-        let link = JSON.parse(body);
-        // let postLink = link.shortUrl;
-        // res.send(link.shortUrl);
-        // debugger;
-        nextCall(null, link.shortUrl);
-      })
+//       request({
+//         uri: "https://api.rebrandly.com/v1/links",
+//         method: "POST",
+//         body: JSON.stringify(linkRequest1),
+//         headers: requestHeaders1
+//       }, (err, response, body) => {
+//         let link = JSON.parse(body);
+//         // let postLink = link.shortUrl;
+//         // res.send(link.shortUrl);
+//         // debugger;
+//         nextCall(null, link.shortUrl);
+//       })
 
-    },
-    function (postLink, nextCall) {
-      var token = '1012069743:AAHAQ-sDOZQW0Qvh3iCrRfmgI2oDTe1Cqqk';  // <= replace with yours
-      var chatId = '@' + req.query.chanel; // <= replace with yours
-      var savings = req.query.regularprice - req.query.sellprice;
-      var savEPERCENT = Math.round(100 * savings / req.query.regularprice);
+//     },
+//     function (postLink, nextCall) {
+//       var token = '1012069743:AAHAQ-sDOZQW0Qvh3iCrRfmgI2oDTe1Cqqk';  // <= replace with yours
+//       var chatId = '@' + req.query.chanel; // <= replace with yours
+//       var savings = req.query.regularprice - req.query.sellprice;
+//       var savEPERCENT = Math.round(100 * savings / req.query.regularprice);
 
-      var html = '🛍 ' + req.query.title + '\n\n' +
-        '🚫 <b>M.R.P. : </b> ₹ ' + req.query.regularprice + '\n' +
-        '♨️ <b style="background-color:red;">PRICE : </b> ₹ ' + req.query.sellprice + '\n' +
-        '💰 <b>SAVINGS : </b> ₹ ' + savings + ' (' + savEPERCENT + '%)\n' +
-        '🔗 <a href=' + postLink.text + '>' + postLink + '</a>\n' +
-        // '🔗 <a href=' + postLink + '>' + postLink + '</a>\n' +
-        '🚚 FREE Delivery\n\n' +
-        // // '👉 More Deals - <a href= @' + req.query.chanel + '> @' + req.query.chanel+'</a>\n'+
-        '👉 <a href="https://t.me/bestshoppingdeal00"> Join US for More Deals </a>\n';
-      // '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
+//       var html = '🛍 ' + req.query.title + '\n\n' +
+//         '🚫 <b>M.R.P. : </b> ₹ ' + req.query.regularprice + '\n' +
+//         '♨️ <b style="background-color:red;">PRICE : </b> ₹ ' + req.query.sellprice + '\n' +
+//         '💰 <b>SAVINGS : </b> ₹ ' + savings + ' (' + savEPERCENT + '%)\n' +
+//         '🔗 <a href=' + postLink.text + '>' + postLink + '</a>\n' +
+//         // '🔗 <a href=' + postLink + '>' + postLink + '</a>\n' +
+//         '🚚 FREE Delivery\n\n' +
+//         // // '👉 More Deals - <a href= @' + req.query.chanel + '> @' + req.query.chanel+'</a>\n'+
+//         '👉 <a href="https://t.me/bestshoppingdeal00"> Join US for More Deals </a>\n';
+//       // '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
 
-      var buttons = [
-        [
-          { "text": "➡️ ➡️ 🛒 CLICK HERE TO BUY 🛒 ⬅️ ⬅️", "url": req.query.productlink }
-        ]
-      ];
-      if (html) {
-        bot = new nodeTelegramBotApi(token, { polling: true });
-        bot.sendPhoto(chatId, req.query.imageurl, {
-          caption: html,
-          parse_mode: "HTML",
-          disable_web_page_preview: true,
-          "reply_markup": {
-            "inline_keyboard": buttons
-          }
-        });
-        nextCall(null, req.query);
-      }
+//       var buttons = [
+//         [
+//           { "text": "➡️ ➡️ 🛒 CLICK HERE TO BUY 🛒 ⬅️ ⬅️", "url": req.query.productlink }
+//         ]
+//       ];
+//       if (html) {
+//         bot = new nodeTelegramBotApi(token, { polling: true });
+//         bot.sendPhoto(chatId, req.query.imageurl, {
+//           caption: html,
+//           parse_mode: "HTML",
+//           disable_web_page_preview: true,
+//           "reply_markup": {
+//             "inline_keyboard": buttons
+//           }
+//         });
+//         nextCall(null, req.query);
+//       }
 
-    },
-  ], function (err, response) {
-    if (err) {
-      return res.send({
-        status: err.code ? err.code : 400,
-        message: (err && err.msg) || "someyhing went wrong"
-      });
-    }
-    return res.send({
-      status_code: 200,
-      message: "telegrame post create sucessfully",
-      data: response
-    });
-  })
-});
+//     },
+//   ], function (err, response) {
+//     if (err) {
+//       return res.send({
+//         status: err.code ? err.code : 400,
+//         message: (err && err.msg) || "someyhing went wrong"
+//       });
+//     }
+//     return res.send({
+//       status_code: 200,
+//       message: "telegrame post create sucessfully",
+//       data: response
+//     });
+//   })
+// });
 
 // setInterval( function (req, res, next) {
 //   async.waterfall([
@@ -401,15 +396,24 @@ router.get('/telegram_postss', function (req, res, next) {
                         } else if(unshortenedUrl.match(/tag/g)){
                     let finalLink =unshortenedUrl.split('&');
                     for (let h = 0; h < finalLink.length; h++) {
-                        if(finalLink[h].match(/^tag/g)){
-                        finalLink[h] = 'tag=kudrats-21'
+                    if(finalLink[h].match(/[?]/g)){
+                      if(finalLink[h].match(/tag/g)){
+                        let finalLinkssd =finalLink[h].split('?');
+                        finalLink[h] = finalLinkssd[0].concat('?tag=kudrats-21')
                       }
+                    }else if(finalLink[h].match(/^ascsubtag/g)){
+                      finalLink[h] = 'demoyou'
+                    }else if(finalLink[h].match(/^ascsub/g)){
+                      finalLink[h] = 'demoyou'
+                    }else if(finalLink[h].match(/^tag/g)){
+                      finalLink[h] = 'tag=kudrats-21'
                     }
-                     tagnot= finalLink.join('&').replace(/@/g, '');
-                    }else{
-                     tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag=kudrats-21');
-                    }
-                   example(tagnot);
+                  }
+                   tagnot= finalLink.join('&').replace(/@/g, '');
+                  }else{
+                   tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag=kudrats-21');
+                  }
+                 example(tagnot.replace(/&demoyou/g, ''));
                         async function example(dddd) {
                           let response =await bitly.shorten(dddd);
                         final[j] = array[j].replace("["+urls[0].replace(/@/g, ' ').trim()+"]",response.link).replace(/.#x...../g,' %E2%99%A8 ').concat("\n").replace(/&/g, 'and').replace(/;/g, ' ');
@@ -432,16 +436,25 @@ router.get('/telegram_postss', function (req, res, next) {
                         let tagnot;
                         if(unshortenedUrl.match(/tag/g)){
                       let finalLink =unshortenedUrl.split('&');
-                      for (let h = 0; h < finalLink.length; h++) {
-                          if(finalLink[h].match(/^tag/g)){
-                          finalLink[h] = 'tag=kudrats-21'
+                     for (let h = 0; h < finalLink.length; h++) {
+                      if(finalLink[h].match(/[?]/g)){
+                        if(finalLink[h].match(/tag/g)){
+                          let finalLinkssd =finalLink[h].split('?');
+                          finalLink[h] = finalLinkssd[0].concat('?tag=kudrats-21')
                         }
+                      }else if(finalLink[h].match(/^ascsubtag/g)){
+                        finalLink[h] = 'demoyou'
+                      }else if(finalLink[h].match(/^ascsub/g)){
+                        finalLink[h] = 'demoyou'
+                      }else if(finalLink[h].match(/^tag/g)){
+                        finalLink[h] = 'tag=kudrats-21'
                       }
-                       tagnot= finalLink.join('&').replace(/@/g, '');
-                      }else{
-                       tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag=kudrats-21');
-                      }
-                     example(tagnot);
+                    }
+                     tagnot= finalLink.join('&').replace(/@/g, '');
+                    }else{
+                     tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag=kudrats-21');
+                    }
+                   example(tagnot.replace(/&demoyou/g, ''));
                           async function example(dddd) {
                             let response =await bitly.shorten(dddd);
                           final[j] = array[j].replace("["+urls[0].replace(/@/g, ' ').trim()+"]",response.link).replace(/.#x...../g,' %E2%99%A8 ').concat("\n").replace(/&/g, 'and').replace(/;/g, ' ');
