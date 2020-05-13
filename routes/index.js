@@ -162,7 +162,6 @@ function postImageWidth(post_link) {
           let sql = 'SELECT COUNT(*) as cnt FROM post_telegram WHERE post_telegram.post_id =' + last_insert_id.id;
           connection.query(sql, function (err, rides) {
             if (err) {
-          setup();
               console.log('err: ', err);
             }
             else if (rides[0].cnt == 0) {
@@ -178,7 +177,7 @@ function postImageWidth(post_link) {
     }, 19000)
     
     function urlencode(str) {
-      return str.replace(/%21/g,'!').replace(/%20/g,' ').replace(/%22/g,'"').replace(/%26/g,'&')
+      return str.replace(/%21/g,'!').replace(/%20/g,' ').replace(/%22/g,'"').replace(/pr%26/g,'pr?').replace(/%26/g,'&')
         .replace(/%27/g,'\'').replace(/%3A/g,':').replace(/%2F/g,'/').replace(/%3D/g,'=')
         .replace(/%28/g,'(').replace(/%3F/g,'?').replace(/%29/g,')').replace(/%2A/g,'*')
         .replace(/%20/g, '+');
@@ -245,6 +244,8 @@ function postImageWidth(post_link) {
                         }
                       }else if(finalLink[h].match(/^ascsubtag/g)){
                         finalLink[h] = 'demoyou'
+                      }else if(finalLink[h].match(/^keywords/g)){
+                        finalLink[h] = 'demoyou'
                       }else if(finalLink[h].match(/^ascsub/g)){
                         finalLink[h] = 'demoyou'
                       }else if(finalLink[h].match(/^tag/g)){
@@ -275,9 +276,11 @@ function postImageWidth(post_link) {
                         }
                         let ListflagDatass = flagsData;
                       let tagnot;
+                      let quelink;
                       if(unshortenedUrl.match(/earnkaro/g)){
                       // if(unshortenedUrl.match(/dl=/g)){
                         let finalLink =unshortenedUrl.split('dl=');
+                        quelink = finalLink[1];
                       for (let k = 0; k < ListflagDatass.length; k++) {
                         if(urlencode(finalLink[1]).match(ListflagDatass[k].domain_url)){
                           tagnot= ListflagDatass[k].Landing_Page.concat("?subid="+ListflagData.admitad_post_tag+"&ulp=").concat(urlencode(finalLink[1]));
@@ -293,6 +296,7 @@ function postImageWidth(post_link) {
                     // .catch(function(err){ console.error('AAAW 👻', err)})
                     //   }
                       }else{
+                        quelink = unshortenedUrl;
                         for (let t = 0; t < ListflagDatass.length; t++) {
                           if(urlencode(unshortenedUrl).match(ListflagDatass[t].domain_url)){
                             tagnot= ListflagDatass[t].Landing_Page.concat("?subid="+ListflagData.admitad_post_tag+"&ulp=").concat(urlencode(unshortenedUrl));
@@ -301,6 +305,20 @@ function postImageWidth(post_link) {
                       }
                       if(tagnot != undefined){
                       example(tagnot.replace(/%25/g,'%'));
+                       }else{
+                        if(urlencode(quelink).match(/flipkart.com/g)){
+                          let finalLink =urlencode(quelink).split('&');
+                          for (let h = 0; h < finalLink.length; h++) {
+                            if(finalLink[h].match(/^affid/g)){
+                              finalLink[h] = 'demoyou'
+                            }else if(finalLink[h].match(/^affExtParam1/g)){
+                              finalLink[h] = 'demoyou'
+                            }
+                          }
+                        let sstarget= finalLink.join('&').replace(/&demoyou/g, '');
+                          tagnot= ("https://linksredirect.com/?cid=76950&subid=kudrat_cl&source=linkkit&url=").concat(encodeURIComponent(sstarget));
+                           example(tagnot);
+                        }
                       }
                       async function example(dddd) {
                         let response =await bitly.shorten(dddd);
@@ -331,6 +349,8 @@ function postImageWidth(post_link) {
                           finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.post_tag)
                         }
                       }else if(finalLink[h].match(/^ascsubtag/g)){
+                        finalLink[h] = 'demoyou'
+                      }else if(finalLink[h].match(/^keywords/g)){
                         finalLink[h] = 'demoyou'
                       }else if(finalLink[h].match(/^ascsub/g)){
                         finalLink[h] = 'demoyou'
@@ -363,8 +383,8 @@ function postImageWidth(post_link) {
                       })
                       .catch(function(err){ console.error('AAAW 👻', err)})
                 }else{
-                  // final[j] = array[j].replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g, ' ').replace(/#/g, '').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
-                  final[j] = array[j].replace(/@frcp_deals/g,'@bestshoppingdeal00').replace(/stg/g,'Best_shopping').replace(/ihd/g,'Best_shopping').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g, ' ').replace(/#/g, '').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
+                  // final[j] = array[j].replace(/@frcp_deals/g,'@bestshoppingdeal00').replace(/stg/g,'Best_shopping').replace(/ihd/g,'Best_shopping').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g, ' ').replace(/#/g, '').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
+                  final[j] = array[j].replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@frcp_deals/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g, ' ').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
                 }
               }
               setTimeout(()=>{
