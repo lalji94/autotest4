@@ -200,7 +200,6 @@ function postImageWidth(post_link) {
           for (let i = 0; i < lastInsertId - rides[0].post_id; i++) {
             let nextId = rides[0].post_id + i + 1;
             let userExists = lastArrayData.filter(user => user.id == nextId);
-            // if (userExists.length > 0) {
               if (userExists.length > 0 && userExists[0].text_data != 'null\n') {
              let final =[];
              let array = userExists[0].text_data.split("\n");
@@ -218,56 +217,56 @@ function postImageWidth(post_link) {
                       maxRedirect: 5
                     }).then(function(unshortenedUrl){ 
                       console.log('unshortenedUrlsssssss: ', unshortenedUrl);
-                    if(unshortenedUrl.match(/amazon.in/g)){
-                      let tagnot;
-                      if(unshortenedUrl.match(/earnkaro/g)){
-                        let finalLink =unshortenedUrl.split('dl=');
-                         if(urlencode(finalLink[1]).match(/[?]/g)){
-                          tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.post_tag);
-                        }else{
-                          tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.post_tag);
-                        }
-                      }else if(unshortenedUrl.match(/paisawapas/g)){
-                          let finalLink =unshortenedUrl.split('url=');
-                           if(urlencode(finalLink[1]).match(/[?]/g)){
-                            tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.post_tag);
-                          }else{
-                            tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.post_tag);
-                          }
-                        } else if(unshortenedUrl.match(/tag/g)){
-                    let finalLink =unshortenedUrl.split('&');
-                    for (let h = 0; h < finalLink.length; h++) {
-                      if(finalLink[h].match(/[?]/g)){
-                        if(finalLink[h].match(/tag/g)){
-                          let finalLinkssd =finalLink[h].split('?');
-                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.post_tag)
-                        }
-                      }else if(finalLink[h].match(/^ascsubtag/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^keywords/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^ascsub/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^tag/g)){
-                        finalLink[h] = 'tag='+ListflagData.post_tag
-                      }
-                    }
-                     tagnot= finalLink.join('&').replace(/@/g, '');
-                    }else{
-                      if(unshortenedUrl.match(/[?]/g)){
-                     tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.post_tag);
-                      }else{
-                     tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.post_tag);
-                      }
-                    }
-                   example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
-                        async function example(dddd) {
-                          let response =await bitly.shorten(dddd);
-                        final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                         postImageWidth(response.link); 
-                      }
-                    // }else if(unshortenedUrl.match(/altbalaji.com/g) ||unshortenedUrl.match(/eduonix.com/g) ||unshortenedUrl.match(/paytmmall.com/g) ||unshortenedUrl.match(/testbook.com/g) ||unshortenedUrl.match(/mamaearth.in/g) ||unshortenedUrl.match(/wonderchef.com/g) ||unshortenedUrl.match(/zee5.com/g) ||unshortenedUrl.match(/beardo.in/g) ||unshortenedUrl.match(/oneplus.in/g) ||unshortenedUrl.match(/1mg.com/g) ||unshortenedUrl.match(/udemy.com/g) ||unshortenedUrl.match(/hometown.in/g) ||unshortenedUrl.match(/magzter.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/ajio.com/g) ||unshortenedUrl.match(/timesprime.com/g)||unshortenedUrl.match(/themomsco.com/g) ||unshortenedUrl.match(/akbartravels.com/g) ||unshortenedUrl.match(/aliexpress.com/g) ||unshortenedUrl.match(/banggood.in/g) ||unshortenedUrl.match(/bata.in/g) ||unshortenedUrl.match(/behrouzbiryani.com/g) ||unshortenedUrl.match(/biba.in/g) ||unshortenedUrl.match(/bigbasket.com/g) ||unshortenedUrl.match(/brandfactoryonline.com/g) ||unshortenedUrl.match(/chumbak.com/g) ||unshortenedUrl.match(/cleartrip.com/g) ||unshortenedUrl.match(/clovia.com/g) ||unshortenedUrl.match(/croma.com/g) ||unshortenedUrl.match(/decathlon.in/g) ||unshortenedUrl.match(/dominos.co.in/g) ||unshortenedUrl.match(/etihad.com/g) ||unshortenedUrl.match(/faasos.io/g) ||unshortenedUrl.match(/fabhotels.com/g) ||unshortenedUrl.match(/firstcry.com/g) ||unshortenedUrl.match(/flipkart.com/g) ||unshortenedUrl.match(/fossil.com/g) ||unshortenedUrl.match(/harmanaudio.in/g) ||unshortenedUrl.match(/hungama.com/g) ||unshortenedUrl.match(/insider.in/g) ||unshortenedUrl.match(/jockeyindia.com/g) ||unshortenedUrl.match(/kalkifashion.com/g) ||unshortenedUrl.match(/lenskart.com/g) ||unshortenedUrl.match(/lifestylestores.com/g) ||unshortenedUrl.match(/limeroad.com/g) ||unshortenedUrl.match(/manyavar.com/g) ||unshortenedUrl.match(/mcdonaldsindia.com/g) ||unshortenedUrl.match(/medlife.com/g) ||unshortenedUrl.match(/microsoft.com/g) ||unshortenedUrl.match(/mivi.in/g) ||unshortenedUrl.match(/makemytrip.com/g) ||unshortenedUrl.match(/myntra.com/g) ||unshortenedUrl.match(/nnnow.com/g) ||unshortenedUrl.match(/nykaafashion.com/g) ||unshortenedUrl.match(/oyorooms.com/g) ||unshortenedUrl.match(/pepperfry.com/g) ||unshortenedUrl.match(/pizzahut.co.in/g) ||unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/qatarairways.com/g) ||unshortenedUrl.match(/rentomojo.com/g) ||unshortenedUrl.match(/samsung.com/g) ||unshortenedUrl.match(/singaporeair.com/g) ||unshortenedUrl.match(/sochstore.com/g) ||unshortenedUrl.match(/tanishq.co.in/g) ||unshortenedUrl.match(/themancompany.com/g) ||unshortenedUrl.match(/zivame.com/g) ||unshortenedUrl.match(/zoomcar.com/g) ){
-                    }else if(unshortenedUrl.match(/balaji/g) ||unshortenedUrl.match(/eduonix.com/g) ||unshortenedUrl.match(/paytmmall.com/g) ||unshortenedUrl.match(/testbook.com/g) ||unshortenedUrl.match(/mamaearth.in/g) ||unshortenedUrl.match(/wonderchef.com/g) ||unshortenedUrl.match(/zee5/g) ||unshortenedUrl.match(/beardo.in/g) ||unshortenedUrl.match(/oneplus.in/g) ||unshortenedUrl.match(/1mg.com/g) ||unshortenedUrl.match(/udemy.com/g) ||unshortenedUrl.match(/hometown.in/g) ||unshortenedUrl.match(/magzter.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/ajio.com/g) ||unshortenedUrl.match(/timesprime.com/g)||unshortenedUrl.match(/themomsco.com/g) ||unshortenedUrl.match(/akbartravels.com/g) ||unshortenedUrl.match(/aliexpress.com/g) ||unshortenedUrl.match(/banggood.in/g) ||unshortenedUrl.match(/bata.in/g) ||unshortenedUrl.match(/behrouzbiryani.com/g) ||unshortenedUrl.match(/biba.in/g) ||unshortenedUrl.match(/bigbasket.com/g) ||unshortenedUrl.match(/brandfactoryonline.com/g) ||unshortenedUrl.match(/chumbak.com/g) ||unshortenedUrl.match(/cleartrip.com/g) ||unshortenedUrl.match(/clovia.com/g) ||unshortenedUrl.match(/croma.com/g) ||unshortenedUrl.match(/decathlon.in/g) ||unshortenedUrl.match(/dominos.co.in/g) ||unshortenedUrl.match(/etihad.com/g) ||unshortenedUrl.match(/faasos.io/g) ||unshortenedUrl.match(/fabhotels.com/g) ||unshortenedUrl.match(/firstcry.com/g) ||unshortenedUrl.match(/flipkart.com/g) ||unshortenedUrl.match(/fossil.com/g) ||unshortenedUrl.match(/harmanaudio.in/g) ||unshortenedUrl.match(/hungama.com/g) ||unshortenedUrl.match(/insider.in/g) ||unshortenedUrl.match(/jockeyindia.com/g) ||unshortenedUrl.match(/kalkifashion.com/g) ||unshortenedUrl.match(/lenskart.com/g) ||unshortenedUrl.match(/lifestylestores.com/g) ||unshortenedUrl.match(/limeroad.com/g) ||unshortenedUrl.match(/manyavar.com/g) ||unshortenedUrl.match(/mcdonaldsindia.com/g) ||unshortenedUrl.match(/medlife.com/g) ||unshortenedUrl.match(/microsoft.com/g) ||unshortenedUrl.match(/mivi.in/g) ||unshortenedUrl.match(/makemytrip.com/g) ||unshortenedUrl.match(/myntra.com/g) ||unshortenedUrl.match(/nnnow.com/g) ||unshortenedUrl.match(/nykaafashion.com/g) ||unshortenedUrl.match(/oyorooms.com/g) ||unshortenedUrl.match(/pepperfry.com/g) ||unshortenedUrl.match(/pizzahut.co.in/g) ||unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/qatarairways.com/g) ||unshortenedUrl.match(/rentomojo.com/g) ||unshortenedUrl.match(/samsung.com/g) ||unshortenedUrl.match(/singaporeair.com/g) ||unshortenedUrl.match(/sochstore.com/g) ||unshortenedUrl.match(/tanishq.co.in/g) ||unshortenedUrl.match(/themancompany.com/g) ||unshortenedUrl.match(/zivame.com/g) ||unshortenedUrl.match(/zoomcar.com/g) ){
+                  //   if(unshortenedUrl.match(/amazon.in/g)){
+                  //     let tagnot;
+                  //     if(unshortenedUrl.match(/earnkaro/g)){
+                  //       let finalLink =unshortenedUrl.split('dl=');
+                  //        if(urlencode(finalLink[1]).match(/[?]/g)){
+                  //         tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.post_tag);
+                  //       }else{
+                  //         tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.post_tag);
+                  //       }
+                  //     }else if(unshortenedUrl.match(/paisawapas/g)){
+                  //         let finalLink =unshortenedUrl.split('url=');
+                  //          if(urlencode(finalLink[1]).match(/[?]/g)){
+                  //           tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.post_tag);
+                  //         }else{
+                  //           tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.post_tag);
+                  //         }
+                  //       } else if(unshortenedUrl.match(/tag/g)){
+                  //   let finalLink =unshortenedUrl.split('&');
+                  //   for (let h = 0; h < finalLink.length; h++) {
+                  //     if(finalLink[h].match(/[?]/g)){
+                  //       if(finalLink[h].match(/tag/g)){
+                  //         let finalLinkssd =finalLink[h].split('?');
+                  //         finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.post_tag)
+                  //       }
+                  //     }else if(finalLink[h].match(/^ascsubtag/g)){
+                  //       finalLink[h] = 'demoyou'
+                  //     }else if(finalLink[h].match(/^keywords/g)){
+                  //       finalLink[h] = 'demoyou'
+                  //     }else if(finalLink[h].match(/^ascsub/g)){
+                  //       finalLink[h] = 'demoyou'
+                  //     }else if(finalLink[h].match(/^tag/g)){
+                  //       finalLink[h] = 'tag='+ListflagData.post_tag
+                  //     }
+                  //   }
+                  //    tagnot= finalLink.join('&').replace(/@/g, '');
+                  //   }else{
+                  //     if(unshortenedUrl.match(/[?]/g)){
+                  //    tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.post_tag);
+                  //     }else{
+                  //    tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.post_tag);
+                  //     }
+                  //   }
+                  //  example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
+                  //       async function example(dddd) {
+                  //         let response =await bitly.shorten(dddd);
+                  //       final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
+                  //        postImageWidth(response.link); 
+                  //     }
+                  //   }else if(unshortenedUrl.match(/balaji/g) ||unshortenedUrl.match(/eduonix.com/g) ||unshortenedUrl.match(/paytmmall.com/g) ||unshortenedUrl.match(/testbook.com/g) ||unshortenedUrl.match(/mamaearth.in/g) ||unshortenedUrl.match(/wonderchef.com/g) ||unshortenedUrl.match(/zee5/g) ||unshortenedUrl.match(/beardo.in/g) ||unshortenedUrl.match(/oneplus.in/g) ||unshortenedUrl.match(/1mg.com/g) ||unshortenedUrl.match(/udemy.com/g) ||unshortenedUrl.match(/hometown.in/g) ||unshortenedUrl.match(/magzter.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/ajio.com/g) ||unshortenedUrl.match(/timesprime.com/g)||unshortenedUrl.match(/themomsco.com/g) ||unshortenedUrl.match(/akbartravels.com/g) ||unshortenedUrl.match(/aliexpress.com/g) ||unshortenedUrl.match(/banggood.in/g) ||unshortenedUrl.match(/bata.in/g) ||unshortenedUrl.match(/behrouzbiryani.com/g) ||unshortenedUrl.match(/biba.in/g) ||unshortenedUrl.match(/bigbasket.com/g) ||unshortenedUrl.match(/brandfactoryonline.com/g) ||unshortenedUrl.match(/chumbak.com/g) ||unshortenedUrl.match(/cleartrip.com/g) ||unshortenedUrl.match(/clovia.com/g) ||unshortenedUrl.match(/croma.com/g) ||unshortenedUrl.match(/decathlon.in/g) ||unshortenedUrl.match(/dominos.co.in/g) ||unshortenedUrl.match(/etihad.com/g) ||unshortenedUrl.match(/faasos.io/g) ||unshortenedUrl.match(/fabhotels.com/g) ||unshortenedUrl.match(/firstcry.com/g) ||unshortenedUrl.match(/flipkart.com/g) ||unshortenedUrl.match(/fossil.com/g) ||unshortenedUrl.match(/harmanaudio.in/g) ||unshortenedUrl.match(/hungama.com/g) ||unshortenedUrl.match(/insider.in/g) ||unshortenedUrl.match(/jockeyindia.com/g) ||unshortenedUrl.match(/kalkifashion.com/g) ||unshortenedUrl.match(/lenskart.com/g) ||unshortenedUrl.match(/lifestylestores.com/g) ||unshortenedUrl.match(/limeroad.com/g) ||unshortenedUrl.match(/manyavar.com/g) ||unshortenedUrl.match(/mcdonaldsindia.com/g) ||unshortenedUrl.match(/medlife.com/g) ||unshortenedUrl.match(/microsoft.com/g) ||unshortenedUrl.match(/mivi.in/g) ||unshortenedUrl.match(/makemytrip.com/g) ||unshortenedUrl.match(/myntra.com/g) ||unshortenedUrl.match(/nnnow.com/g) ||unshortenedUrl.match(/nykaafashion.com/g) ||unshortenedUrl.match(/oyorooms.com/g) ||unshortenedUrl.match(/pepperfry.com/g) ||unshortenedUrl.match(/pizzahut.co.in/g) ||unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/qatarairways.com/g) ||unshortenedUrl.match(/rentomojo.com/g) ||unshortenedUrl.match(/samsung.com/g) ||unshortenedUrl.match(/singaporeair.com/g) ||unshortenedUrl.match(/sochstore.com/g) ||unshortenedUrl.match(/tanishq.co.in/g) ||unshortenedUrl.match(/themancompany.com/g) ||unshortenedUrl.match(/zivame.com/g) ||unshortenedUrl.match(/zoomcar.com/g) ){
+                     if(unshortenedUrl.match(/balaji/g) ||unshortenedUrl.match(/eduonix.com/g) ||unshortenedUrl.match(/paytmmall.com/g) ||unshortenedUrl.match(/testbook.com/g) ||unshortenedUrl.match(/mamaearth.in/g) ||unshortenedUrl.match(/wonderchef.com/g) ||unshortenedUrl.match(/zee5/g) ||unshortenedUrl.match(/beardo.in/g) ||unshortenedUrl.match(/oneplus.in/g) ||unshortenedUrl.match(/1mg.com/g) ||unshortenedUrl.match(/udemy.com/g) ||unshortenedUrl.match(/hometown.in/g) ||unshortenedUrl.match(/magzter.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/ajio.com/g) ||unshortenedUrl.match(/timesprime.com/g)||unshortenedUrl.match(/themomsco.com/g) ||unshortenedUrl.match(/akbartravels.com/g) ||unshortenedUrl.match(/aliexpress.com/g) ||unshortenedUrl.match(/banggood.in/g) ||unshortenedUrl.match(/bata.in/g) ||unshortenedUrl.match(/behrouzbiryani.com/g) ||unshortenedUrl.match(/biba.in/g) ||unshortenedUrl.match(/bigbasket.com/g) ||unshortenedUrl.match(/brandfactoryonline.com/g) ||unshortenedUrl.match(/chumbak.com/g) ||unshortenedUrl.match(/cleartrip.com/g) ||unshortenedUrl.match(/clovia.com/g) ||unshortenedUrl.match(/croma.com/g) ||unshortenedUrl.match(/decathlon.in/g) ||unshortenedUrl.match(/dominos.co.in/g) ||unshortenedUrl.match(/etihad.com/g) ||unshortenedUrl.match(/faasos.io/g) ||unshortenedUrl.match(/fabhotels.com/g) ||unshortenedUrl.match(/firstcry.com/g) ||unshortenedUrl.match(/flipkart.com/g) ||unshortenedUrl.match(/fossil.com/g) ||unshortenedUrl.match(/harmanaudio.in/g) ||unshortenedUrl.match(/hungama.com/g) ||unshortenedUrl.match(/insider.in/g) ||unshortenedUrl.match(/jockeyindia.com/g) ||unshortenedUrl.match(/kalkifashion.com/g) ||unshortenedUrl.match(/lenskart.com/g) ||unshortenedUrl.match(/lifestylestores.com/g) ||unshortenedUrl.match(/limeroad.com/g) ||unshortenedUrl.match(/manyavar.com/g) ||unshortenedUrl.match(/mcdonaldsindia.com/g) ||unshortenedUrl.match(/medlife.com/g) ||unshortenedUrl.match(/microsoft.com/g) ||unshortenedUrl.match(/mivi.in/g) ||unshortenedUrl.match(/makemytrip.com/g) ||unshortenedUrl.match(/myntra.com/g) ||unshortenedUrl.match(/nnnow.com/g) ||unshortenedUrl.match(/nykaafashion.com/g) ||unshortenedUrl.match(/oyorooms.com/g) ||unshortenedUrl.match(/pepperfry.com/g) ||unshortenedUrl.match(/pizzahut.co.in/g) ||unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/qatarairways.com/g) ||unshortenedUrl.match(/rentomojo.com/g) ||unshortenedUrl.match(/samsung.com/g) ||unshortenedUrl.match(/singaporeair.com/g) ||unshortenedUrl.match(/sochstore.com/g) ||unshortenedUrl.match(/tanishq.co.in/g) ||unshortenedUrl.match(/themancompany.com/g) ||unshortenedUrl.match(/zivame.com/g) ||unshortenedUrl.match(/zoomcar.com/g) ){
                       let sqlssnet = "SELECT * FROM diff_net_posts WHERE active_flag ='TRUE'";
                       connection.query(sqlssnet, function (err, flagsData) {
                         if (err) {
@@ -325,61 +324,52 @@ function postImageWidth(post_link) {
                       final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
                     }
                   })
-                    }else{
-                      tall(unshortenedUrl, {
-                        method: 'HEAD',
-                        maxRedirect: 5
-                      }).then(function(unshortenedUrl){ 
-                    // if(unshortenedUrl.match(/amazon.in/g) && unshortenedUrl.match(/tag/g)){
-                    //   console.log("----ui");
-                    //   let finalLink =unshortenedUrl.split('&');
-                    //   for (let h = 0; h < finalLink.length; h++) {
-                    //     if(finalLink[h].match(/^tag/g)){
-                    //       finalLink[h] = 'tag='+ListflagData.post_tag
-                    //     }
-                    //   }
-                      if(unshortenedUrl.match(/amazon.in/g)){
-                        let tagnot;
-                        if(unshortenedUrl.match(/tag/g)){
-                      let finalLink =unshortenedUrl.split('&');
-                     for (let h = 0; h < finalLink.length; h++) {
-                      if(finalLink[h].match(/[?]/g)){
-                        if(finalLink[h].match(/tag/g)){
-                          let finalLinkssd =finalLink[h].split('?');
-                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.post_tag)
-                        }
-                      }else if(finalLink[h].match(/^ascsubtag/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^keywords/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^ascsub/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^tag/g)){
-                        finalLink[h] = 'tag='+ListflagData.post_tag
-                      }
                     }
-                     tagnot= finalLink.join('&').replace(/@/g, '');
-                    }else{
-                     if(unshortenedUrl.match(/[?]/g)){
-                      tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.post_tag);
-                       }else{
-                      tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.post_tag);
-                       }
-                    }
-                   example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
-                          async function example(dddd) {
-                            let response =await bitly.shorten(dddd);
-                          final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                           postImageWidth(response.link); 
-                        }
-                      }else{
-                        // let finalLink =unshortenedUrl.split('?');
-                        // final[j] = array[j].replace("["+urls[0].replace(/@/g, ' ').trim()+"]",finalLink[0]).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                        final[j] = ' ';
-                      }
-                    })
-                    .catch(function(err){ console.error('AAAW 👻', err)})
-                    }
+                  //   else{
+                  //     tall(unshortenedUrl, {
+                  //       method: 'HEAD',
+                  //       maxRedirect: 5
+                  //     }).then(function(unshortenedUrl){ 
+                  //     if(unshortenedUrl.match(/amazon.in/g)){
+                  //       let tagnot;
+                  //       if(unshortenedUrl.match(/tag/g)){
+                  //     let finalLink =unshortenedUrl.split('&');
+                  //    for (let h = 0; h < finalLink.length; h++) {
+                  //     if(finalLink[h].match(/[?]/g)){
+                  //       if(finalLink[h].match(/tag/g)){
+                  //         let finalLinkssd =finalLink[h].split('?');
+                  //         finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.post_tag)
+                  //       }
+                  //     }else if(finalLink[h].match(/^ascsubtag/g)){
+                  //       finalLink[h] = 'demoyou'
+                  //     }else if(finalLink[h].match(/^keywords/g)){
+                  //       finalLink[h] = 'demoyou'
+                  //     }else if(finalLink[h].match(/^ascsub/g)){
+                  //       finalLink[h] = 'demoyou'
+                  //     }else if(finalLink[h].match(/^tag/g)){
+                  //       finalLink[h] = 'tag='+ListflagData.post_tag
+                  //     }
+                  //   }
+                  //    tagnot= finalLink.join('&').replace(/@/g, '');
+                  //   }else{
+                  //    if(unshortenedUrl.match(/[?]/g)){
+                  //     tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.post_tag);
+                  //      }else{
+                  //     tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.post_tag);
+                  //      }
+                  //   }
+                  //  example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
+                  //         async function example(dddd) {
+                  //           let response =await bitly.shorten(dddd);
+                  //         final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
+                  //          postImageWidth(response.link); 
+                  //       }
+                  //     }else{
+                  //       final[j] = ' ';
+                  //     }
+                  //   })
+                  //   .catch(function(err){ console.error('AAAW 👻', err)})
+                  //   }
                       })
                       .catch(function(err){ console.error('AAAW 👻', err)})
                 }else{
