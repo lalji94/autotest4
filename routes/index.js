@@ -134,9 +134,9 @@ function postImageWidth(post_link) {
 // setInterval( function (req, res, next) {
 //   async.waterfall([
   setInterval( function setup() {
-      // axios('https://t.me/s/IHDBroadcast')
+      axios('https://t.me/s/IHDBroadcast')
       // axios('https://t.me/s/stg003')
-      axios('https://t.me/s/HotDealsOfficials')
+      // axios('https://t.me/s/HotDealsOfficials')
         .then(response => {
           var html = response.data;
           var $ = cheerio.load(html);
@@ -222,16 +222,16 @@ function postImageWidth(post_link) {
                       if(unshortenedUrl.match(/earnkaro/g)){
                         let finalLink =unshortenedUrl.split('dl=');
                          if(urlencode(finalLink[1]).match(/[?]/g)){
-                          tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.post_tag);
+                          tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.org_post_tag);
                         }else{
-                          tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.post_tag);
+                          tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.org_post_tag);
                         }
                       }else if(unshortenedUrl.match(/paisawapas/g)){
                           let finalLink =unshortenedUrl.split('url=');
                            if(urlencode(finalLink[1]).match(/[?]/g)){
-                            tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.post_tag);
+                            tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.org_post_tag);
                           }else{
-                            tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.post_tag);
+                            tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.org_post_tag);
                           }
                         } else if(unshortenedUrl.match(/tag/g)){
                     let finalLink =unshortenedUrl.split('&');
@@ -239,7 +239,7 @@ function postImageWidth(post_link) {
                       if(finalLink[h].match(/[?]/g)){
                         if(finalLink[h].match(/tag/g)){
                           let finalLinkssd =finalLink[h].split('?');
-                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.post_tag)
+                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.org_post_tag)
                         }
                       }else if(finalLink[h].match(/^ascsubtag/g)){
                         finalLink[h] = 'demoyou'
@@ -248,15 +248,15 @@ function postImageWidth(post_link) {
                       }else if(finalLink[h].match(/^ascsub/g)){
                         finalLink[h] = 'demoyou'
                       }else if(finalLink[h].match(/^tag/g)){
-                        finalLink[h] = 'tag='+ListflagData.post_tag
+                        finalLink[h] = 'tag='+ListflagData.org_post_tag
                       }
                     }
                      tagnot= finalLink.join('&').replace(/@/g, '');
                     }else{
                       if(unshortenedUrl.match(/[?]/g)){
-                     tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.post_tag);
+                     tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.org_post_tag);
                       }else{
-                     tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.post_tag);
+                     tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag);
                       }
                     }
                    example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
@@ -339,7 +339,7 @@ function postImageWidth(post_link) {
                       if(finalLink[h].match(/[?]/g)){
                         if(finalLink[h].match(/tag/g)){
                           let finalLinkssd =finalLink[h].split('?');
-                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.post_tag)
+                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.org_post_tag)
                         }
                       }else if(finalLink[h].match(/^ascsubtag/g)){
                         finalLink[h] = 'demoyou'
@@ -348,15 +348,15 @@ function postImageWidth(post_link) {
                       }else if(finalLink[h].match(/^ascsub/g)){
                         finalLink[h] = 'demoyou'
                       }else if(finalLink[h].match(/^tag/g)){
-                        finalLink[h] = 'tag='+ListflagData.post_tag
+                        finalLink[h] = 'tag='+ListflagData.org_post_tag
                       }
                     }
                      tagnot= finalLink.join('&').replace(/@/g, '');
                     }else{
                      if(unshortenedUrl.match(/[?]/g)){
-                      tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.post_tag);
+                      tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.org_post_tag);
                        }else{
-                      tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.post_tag);
+                      tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag);
                        }
                     }
                    example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
