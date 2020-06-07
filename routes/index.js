@@ -57,7 +57,7 @@ function postImageWidth(post_link,token) {
     }
 
     function telePost (token,post_img,post_title,post_regularPrice,post_sellPrice,savepercent,post_link,avilabilty) {
-      var chatId = '@onlywomensworld'; // <= replace with yours
+      var chatId = '@bestshoppingdeal00'; // <= replace with yours
       // var savings = post_regularPrice - post_sellPrice;
       // var savEPERCENT = Math.round(100 * savings / post_regularPrice);
 
@@ -93,7 +93,7 @@ function postImageWidth(post_link,token) {
     }
 
     function telePosted (token,post_img,post_title,post_sellPrice,post_link,avilabilty) {
-      var chatId = '@onlywomensworld'; // <= replace with yours
+      var chatId = '@bestshoppingdeal00'; // <= replace with yours
 
       // var savings = post_regularPrice - post_sellPrice;
       // var savEPERCENT = Math.round(100 * savings / post_regularPrice);
