@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-function postImageWidth(post_link) {
+function postImageWidth(post_link,token) {
   axios(post_link)
   // axios('https://www.amazon.in/dp/B07DJD1RTM')
       .then(response => {
@@ -44,11 +44,11 @@ function postImageWidth(post_link) {
           console.log('avilabilty: ', avilabilty);
 
           if(siteheadidsdng && siteheading && sitestrckprice && sitestrckpricessds && savepercent ){
-        telePost(siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
+        telePost(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
             console.log("===i");
          } else if(siteheadidsdng && siteheading && sitestrckpricessds && avilabilty ){
             console.log("===i");
-          telePosted(siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
+          telePosted(token,siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
         }else{
             console.log("no---");
           }
@@ -56,10 +56,8 @@ function postImageWidth(post_link) {
       .catch(console.error);
     }
 
-    function telePost (post_img,post_title,post_regularPrice,post_sellPrice,savepercent,post_link,avilabilty) {
-      var token = '1175672156:AAHUFIWJdFB5vaEXOFn4GsanLAacKJUNDdw';  // <= replace with yours
+    function telePost (token,post_img,post_title,post_regularPrice,post_sellPrice,savepercent,post_link,avilabilty) {
       var chatId = '@bestshoppingdeal00'; // <= replace with yours
-
       // var savings = post_regularPrice - post_sellPrice;
       // var savEPERCENT = Math.round(100 * savings / post_regularPrice);
 
@@ -94,8 +92,7 @@ function postImageWidth(post_link) {
       }
     }
 
-    function telePosted (post_img,post_title,post_sellPrice,post_link,avilabilty) {
-      var token = '1175672156:AAHUFIWJdFB5vaEXOFn4GsanLAacKJUNDdw';  // <= replace with yours
+    function telePosted (token,post_img,post_title,post_sellPrice,post_link,avilabilty) {
       var chatId = '@bestshoppingdeal00'; // <= replace with yours
 
       // var savings = post_regularPrice - post_sellPrice;
@@ -215,7 +212,8 @@ function postImageWidth(post_link) {
                      tall(urls[0], {
                       method: 'HEAD',
                       maxRedirect: 5
-                    }).then(function(unshortenedUrl){ 
+                    }).then(function(unshortenedUrls){ 
+                      let unshortenedUrl = unshortenedUrls.replace(/&amp;/g,'&');
                       console.log('unshortenedUrlsssssss: ', unshortenedUrl);
                     if(unshortenedUrl.match(/amazon.in/g)){
                       let tagnot;
@@ -263,7 +261,7 @@ function postImageWidth(post_link) {
                         async function example(dddd) {
                           let response =await bitly.shorten(dddd);
                         final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                         postImageWidth(response.link); 
+                         postImageWidth(response.link,ListflagData.bestshopping_token); 
                       }
                   
 						  }else if(unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/unacademy.com/g) ||unshortenedUrl.match(/coolwinks.com/g) ||unshortenedUrl.match(/orra.co.in/g) ||unshortenedUrl.match(/360totalsecurity.com/g) ||unshortenedUrl.match(/maxbupa.com/g) ||unshortenedUrl.match(/religarehealthinsurance.com/g) ||unshortenedUrl.match(/fnp.com/g) ||unshortenedUrl.match(/healthxp.in/g) ||unshortenedUrl.match(/bigrock.in/g) ||unshortenedUrl.match(/igp.com/g) ||unshortenedUrl.match(/letyshops.com/g) ||unshortenedUrl.match(/spartanpoker.com/g) ||unshortenedUrl.match(/adda52.com/g) ||unshortenedUrl.match(/balaji/g) ||unshortenedUrl.match(/eduonix.com/g) ||unshortenedUrl.match(/paytmmall.com/g) ||unshortenedUrl.match(/testbook.com/g) ||unshortenedUrl.match(/mamaearth.in/g) ||unshortenedUrl.match(/wonderchef.com/g) ||unshortenedUrl.match(/zee5/g) ||unshortenedUrl.match(/beardo.in/g) ||unshortenedUrl.match(/oneplus.in/g) ||unshortenedUrl.match(/1mg.com/g) ||unshortenedUrl.match(/udemy.com/g) ||unshortenedUrl.match(/hometown.in/g) ||unshortenedUrl.match(/magzter.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/ajio.com/g) ||unshortenedUrl.match(/timesprime.com/g)||unshortenedUrl.match(/themomsco.com/g) ||unshortenedUrl.match(/akbartravels.com/g) ||unshortenedUrl.match(/aliexpress.com/g) ||unshortenedUrl.match(/banggood.in/g) ||unshortenedUrl.match(/bata.in/g) ||unshortenedUrl.match(/behrouzbiryani.com/g) ||unshortenedUrl.match(/biba.in/g) ||unshortenedUrl.match(/bigbasket.com/g) ||unshortenedUrl.match(/brandfactoryonline.com/g) ||unshortenedUrl.match(/chumbak.com/g) ||unshortenedUrl.match(/cleartrip.com/g) ||unshortenedUrl.match(/clovia.com/g) ||unshortenedUrl.match(/croma.com/g) ||unshortenedUrl.match(/decathlon.in/g) ||unshortenedUrl.match(/dominos.co.in/g) ||unshortenedUrl.match(/etihad.com/g) ||unshortenedUrl.match(/faasos.io/g) ||unshortenedUrl.match(/fabhotels.com/g) ||unshortenedUrl.match(/firstcry.com/g) ||unshortenedUrl.match(/flipkart.com/g) ||unshortenedUrl.match(/fossil.com/g) ||unshortenedUrl.match(/harmanaudio.in/g) ||unshortenedUrl.match(/hungama.com/g) ||unshortenedUrl.match(/insider.in/g) ||unshortenedUrl.match(/jockeyindia.com/g) ||unshortenedUrl.match(/kalkifashion.com/g) ||unshortenedUrl.match(/lenskart.com/g) ||unshortenedUrl.match(/lifestylestores.com/g) ||unshortenedUrl.match(/limeroad.com/g) ||unshortenedUrl.match(/manyavar.com/g) ||unshortenedUrl.match(/mcdonaldsindia.com/g) ||unshortenedUrl.match(/medlife.com/g) ||unshortenedUrl.match(/microsoft.com/g) ||unshortenedUrl.match(/mivi.in/g) ||unshortenedUrl.match(/makemytrip.com/g) ||unshortenedUrl.match(/myntra.com/g) ||unshortenedUrl.match(/nnnow.com/g) ||unshortenedUrl.match(/nykaafashion.com/g) ||unshortenedUrl.match(/oyorooms.com/g) ||unshortenedUrl.match(/pepperfry.com/g) ||unshortenedUrl.match(/pizzahut.co.in/g) ||unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/qatarairways.com/g) ||unshortenedUrl.match(/rentomojo.com/g) ||unshortenedUrl.match(/samsung.com/g) ||unshortenedUrl.match(/singaporeair.com/g) ||unshortenedUrl.match(/sochstore.com/g) ||unshortenedUrl.match(/tanishq.co.in/g) ||unshortenedUrl.match(/themancompany.com/g) ||unshortenedUrl.match(/zivame.com/g) ||unshortenedUrl.match(/zoomcar.com/g) ){
@@ -330,7 +328,8 @@ function postImageWidth(post_link) {
                       tall(unshortenedUrl, {
                         method: 'HEAD',
                         maxRedirect: 5
-                      }).then(function(unshortenedUrl){ 
+                      }).then(function(unshortenedUrls){ 
+                      let unshortenedUrl = unshortenedUrls.replace(/&amp;/g,'&');
                       if(unshortenedUrl.match(/amazon.in/g)){
                         let tagnot;
                         if(unshortenedUrl.match(/tag/g)){
@@ -363,7 +362,7 @@ function postImageWidth(post_link) {
                           async function example(dddd) {
                             let response =await bitly.shorten(dddd);
                           final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                           postImageWidth(response.link); 
+                           postImageWidth(response.link,ListflagData.bestshopping_token); 
                         }
                       }else{
                         final[j] = ' ';
@@ -401,7 +400,7 @@ function postImageWidth(post_link) {
                 }else if(ListflagData.ihd_tele_flag == '1' && ListflagData.ihd_watts_flag == '1' ){
                   for (let l = 0; l < finalPostList.length; l++) {
                     // if(finalPostList[l].groupflag == '0'){
-                      teleAutoPostChannel(finalAmazon,finalPostList[l].groupname);
+                      teleAutoPostChannel(finalAmazon,finalPostList[l].groupname,ListflagData.kudart_token);
                       // teleAutoPost(finalAmazon);
                     // }
                   }
@@ -410,7 +409,7 @@ function postImageWidth(post_link) {
                 }else if(ListflagData.ihd_tele_flag == '1' && ListflagData.ihd_watts_flag == '0' ){
                   for (let l = 0; l < finalPostList.length; l++) {
                     // if(finalPostList[l].groupflag == '0'){
-                      teleAutoPostChannel(finalAmazon,finalPostList[l].groupname);
+                      teleAutoPostChannel(finalAmazon,finalPostList[l].groupname,ListflagData.kudart_token);
                       // teleAutoPost(finalAmazon);
                     // }
                   }
@@ -430,38 +429,12 @@ function postImageWidth(post_link) {
       })
     }
 
-function teleAutoPost(finalAmazon){
-  var token = '1012069743:AAHAQ-sDOZQW0Qvh3iCrRfmgI2oDTe1Cqqk';  // <= replace with yours
-    var chatId = '@testchannel0112'; // <= replace with yours
-    bot = new nodeTelegramBotApi(token);
-    bot.sendMessage(chatId, finalAmazon)
-    // var apijj = 'https://api.telegram.org/bot777630419:AAGu5PbnSJ_yhnSjqrf_8t-2tHMqZUJDS08/sendMessage?chat_id=@testchannel0112&text='+finalAmazon;
-    // request({
-    //   uri: apijj
-    // }, (err, response) => {
-    //   if(err){
-    //     setup();
-    //   }
-    // })
-}
-
-function teleAutoPostChannel(finalAmazon,chanelName){
-  var token = '1175672156:AAHUFIWJdFB5vaEXOFn4GsanLAacKJUNDdw';  // <= replace with yours
+function teleAutoPostChannel(finalAmazon,chanelName,token){
     var chatId = chanelName; // <= replace with yours
     bot = new nodeTelegramBotApi(token);
-    // bot.sendMessage(chatId, finalAmazon)
     bot.sendMessage(chatId, finalAmazon,{
       disable_web_page_preview: true
     })
-    // bot.sendMessage(chatId, userExists[0].text_data)
-    // var apijj = 'https://api.telegram.org/bot777630419:AAGu5PbnSJ_yhnSjqrf_8t-2tHMqZUJDS08/sendMessage?chat_id=@testchannel0112&text='+finalAmazon;
-    // request({
-    //   uri: apijj
-    // }, (err, response) => {
-    //   if(err){
-    //     setup();
-    //   }
-    // })
 }
 
 
