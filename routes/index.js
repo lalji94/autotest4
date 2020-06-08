@@ -45,16 +45,90 @@ function postImageWidth(post_link,token) {
 
           if(siteheadidsdng && siteheading && sitestrckprice && sitestrckpricessds && savepercent ){
         telePost(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
-            console.log("===i");
+        telePostgujarat(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
+        console.log("===i");
          } else if(siteheadidsdng && siteheading && sitestrckpricessds && avilabilty ){
             console.log("===i");
           telePosted(token,siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
+          telePostedgujarat(token,siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
         }else{
             console.log("no---");
           }
       })
       .catch(console.error);
     }
+    function telePostgujarat (token,post_img,post_title,post_regularPrice,post_sellPrice,savepercent,post_link,avilabilty) {
+      var chatId = '@bestshoppingdl'; // <= replace with yours
+      // var savings = post_regularPrice - post_sellPrice;
+      // var savEPERCENT = Math.round(100 * savings / post_regularPrice);
+
+      var html = '🛍 ' + post_title + '\n\n' +
+        '🔗 <a href="' + post_link + '">' + post_link + '</a>\n' +
+        '♨️ <b style="background-color:red;">PRICE : </b> ' + post_sellPrice + '\n' +
+        '🚫 <b>M.R.P. : </b> ' + post_regularPrice + '\n' +
+        '💰 <b>SAVINGS : </b> ' + savepercent + '\n' +
+        '🙋 <b>AVAILABILITY : </b> <i> ' + avilabilty + '</i>\n' +
+        '🚚 FREE Delivery\n\n' +
+        // '👉 More Deals - <a href= @' + req.query.chanel + '> @' + req.query.chanel+'</a>\n'+
+        // '👉 More Deals - @' + req.query.chanel;
+        '👉 <a href="https://t.me/bestshoppingdl"> Join US for More Deals </a>\n';
+      // +'\n'+
+      // '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
+      var buttons = [
+        [
+          { "text": "➡️ ➡️ 🛒 CLICK HERE TO BUY 🛒 ⬅️ ⬅️", "url": post_link }
+        ]
+      ];
+      console.log('html: ', html);
+      if (html) {
+        bot = new nodeTelegramBotApi(token);
+        bot.sendPhoto(chatId, post_img, {
+          caption: html,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+          "reply_markup": {
+            "inline_keyboard": buttons
+          }
+        });
+      }
+    }
+
+    function telePostedgujarat (token,post_img,post_title,post_sellPrice,post_link,avilabilty) {
+      var chatId = '@bestshoppingdl'; // <= replace with yours
+
+      // var savings = post_regularPrice - post_sellPrice;
+      // var savEPERCENT = Math.round(100 * savings / post_regularPrice);
+
+      var html = '🛍 ' + post_title + '\n\n' +
+        '🔗 <a href="' + post_link + '">' + post_link + '</a>\n' +
+        '♨️ <b style="background-color:red;">PRICE : </b> ' + post_sellPrice + '\n' +
+        '🙋 <b>AVAILABILITY : </b> <i> ' + avilabilty + '</i>\n' +
+        '🚚 FREE Delivery\n\n' +
+        // '👉 More Deals - <a href= @' + req.query.chanel + '> @' + req.query.chanel+'</a>\n'+
+        // '👉 More Deals - @' + req.query.chanel;
+        '👉 <a href="https://t.me/bestshoppingdl"> Join US for More Deals </a>\n';
+      // +'\n'+
+      // '🌐 Website - <a href=' + req.query.website.text + '>' + req.query.website + '</a>';
+      var buttons = [
+        [
+          { "text": "➡️ ➡️ 🛒 CLICK HERE TO BUY 🛒 ⬅️ ⬅️", "url": post_link }
+        ]
+      ];
+      console.log('html: ', html);
+
+      if (html) {
+        bot = new nodeTelegramBotApi(token);
+        bot.sendPhoto(chatId, post_img, {
+          caption: html,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+          "reply_markup": {
+            "inline_keyboard": buttons
+          }
+        });
+      }
+    }
+ 
 
     function telePost (token,post_img,post_title,post_regularPrice,post_sellPrice,savepercent,post_link,avilabilty) {
       var chatId = '@bestshoppingdeal00'; // <= replace with yours
