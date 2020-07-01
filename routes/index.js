@@ -245,7 +245,7 @@ function postImageWidth(post_link,token) {
           setup();
           console.log(error);
         })
-    }, 19000)
+    }, 15000)
     
     function urlencode(str) {
       return str.replace(/%21/g,'!').replace(/%20/g,' ').replace(/%22/g,'"').replace(/pr%26/g,'pr?').replace(/%26/g,'&')
