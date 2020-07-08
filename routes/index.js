@@ -205,7 +205,8 @@ function postImageWidth(post_link,token) {
 // setInterval( function (req, res, next) {
 //   async.waterfall([
   setInterval( function setup() {
-      axios('https://t.me/s/IHDBroadcast')
+//       axios('https://t.me/s/IHDBroadcast')
+      axios('https://t.me/s/frcp_deals')
       // axios('https://t.me/s/stg003')
       // axios('https://t.me/s/HotDealsOfficials')
         .then(response => {
