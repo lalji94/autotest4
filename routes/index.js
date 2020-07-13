@@ -387,20 +387,20 @@ function postImageWidth(post_link,token) {
                       }
                       if(tagnot != undefined){
                       example(tagnot.replace(/%25/g,'%'));
-                       }else{
-                        if(urlencode(quelink).match(/flipkart.com/g)){
-                          let finalLink =urlencode(quelink).split('&');
-                          for (let h = 0; h < finalLink.length; h++) {
-                            if(finalLink[h].match(/^affid/g)){
-                              finalLink[h] = 'demoyou'
-                            }else if(finalLink[h].match(/^affExtParam1/g)){
-                              finalLink[h] = 'demoyou'
-                            }
-                          }
-                        let sstarget= finalLink.join('&').replace(/&demoyou/g, '');
-                          tagnot= ("https://linksredirect.com/?cid=76950&subid=kudrat_cl&source=linkkit&url=").concat(encodeURIComponent(sstarget));
-                           example(tagnot.replace(/[[]/g,'%5B').replace(/[]]/g,'%5D'));
-                        }
+//                        }else{
+//                         if(urlencode(quelink).match(/flipkart.com/g)){
+//                           let finalLink =urlencode(quelink).split('&');
+//                           for (let h = 0; h < finalLink.length; h++) {
+//                             if(finalLink[h].match(/^affid/g)){
+//                               finalLink[h] = 'demoyou'
+//                             }else if(finalLink[h].match(/^affExtParam1/g)){
+//                               finalLink[h] = 'demoyou'
+//                             }
+//                           }
+//                         let sstarget= finalLink.join('&').replace(/&demoyou/g, '');
+//                           tagnot= ("https://linksredirect.com/?cid=76950&subid=kudrat_cl&source=linkkit&url=").concat(encodeURIComponent(sstarget));
+//                            example(tagnot.replace(/[[]/g,'%5B').replace(/[]]/g,'%5D'));
+//                         }
                       }
                       async function example(dddd) {
                         let response =await bitly.shorten(dddd);
