@@ -72,11 +72,18 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
       })
     })
       .catch(err =>{ 
+        let sqlss = "INSERT INTO post_telegram (post_id,data) VALUES (" + storeId + ",'demo')";
+        connection.query(sqlss, function (err, rides) {
+          if (err) {
+          console.log('err: ', err);
+          }else{
         for (let l = 0; l < telegroup.length; l++) {
           teleAutoPostChannel(finalAmznData,telegroup[l].groupname,amzn_data);
         }
         teleAutoPostChannel(finalAmznData,"@bestshoppingdl",token);
         teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
+      }
+       })
       });
     }
     function telePostgujarat (token,post_img,post_title,post_regularPrice,post_sellPrice,savepercent,post_link,avilabilty) {
@@ -612,6 +619,13 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
             }
               },Math.ceil(array.length/5)*3500);
             }
+            }else{
+              let sqlss = "INSERT INTO post_telegram (post_id,data) VALUES (" + nextId + ",'demo')";
+              connection.query(sqlss, function (err, rides) {
+                if (err) {
+                console.log('err: ', err);
+                }
+              })
             }
           }
           }
