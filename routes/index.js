@@ -479,26 +479,27 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                     // tagnot= tagnots.concat('&affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat').replace(/(\?&)/g, '?').replace(/&&/g, '&');
                     //  console.log('tagnot: ', tagnot);
                     // }
-                    else{
-                      var dateObj = new Date();
-                            var month = dateObj.getUTCMonth() + 1; //months from 1-12
-                            var day = dateObj.getUTCDate();
-                            var year = dateObj.getUTCFullYear();
-                            var hour = dateObj.getHours();
-                            var minu = dateObj.getMinutes();
-                            let ren = Math.random().toString(36).substring(7);
-                     tagnot= tagnotFlipkart.concat('?affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat');
-                    }
+//                     else{
+//                       var dateObj = new Date();
+//                             var month = dateObj.getUTCMonth() + 1; //months from 1-12
+//                             var day = dateObj.getUTCDate();
+//                             var year = dateObj.getUTCFullYear();
+//                             var hour = dateObj.getHours();
+//                             var minu = dateObj.getMinutes();
+//                             let ren = Math.random().toString(36).substring(7);
+//                      tagnot= tagnotFlipkart.concat('?affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat');
+//                     }
   
-                     example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
-                        async function example(dddd) {
-                          console.log('dddd: ', dddd);
-                          let response =await bitly.shorten(dddd);
-                        final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                        console.log('final[j]: ', final[j]);
-                        //  postImageWidth(response.link,ListflagData.bestshopping_token);
-                      }
-                    }else{
+//                      example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
+//                         async function example(dddd) {
+//                           console.log('dddd: ', dddd);
+//                           let response =await bitly.shorten(dddd);
+//                         final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
+//                         console.log('final[j]: ', final[j]);
+//                         //  postImageWidth(response.link,ListflagData.bestshopping_token);
+//                       }
+//                     }
+					    else{
                       // tall(unshortenedUrl, {
                       //   method: 'HEAD',
                       //   maxRedirect: 5
