@@ -287,6 +287,12 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
     function urldecode(str) {
       return str.replace(/&/g,'%26').replace(/=/g,'%3D').replace(/[?]/g,'%3F').replace(/[+]/g,'%2B').replace(/[[]/g,'%5B').replace(/[]]/g,'%5D');
     }
+    function conurlencode(str) {
+      return str.replace(/%21/g,'!').replace(/%20/g,' ').replace(/%22/g,'"').replace(/%26/g,'&')
+        .replace(/%27/g,'\'').replace(/%3A/g,':').replace(/%2F/g,'/').replace(/%3D/g,'=')
+        .replace(/%28/g,'(').replace(/%3F/g,'?').replace(/%29/g,')').replace(/%2A/g,'*')
+        .replace(/%20/g, '+');
+    }
 
     function posttele (bodyss, lastInsertId, lastArrayData) {
       let sqlsss = "SELECT * FROM post_flags";
@@ -377,7 +383,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                      tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
                     }
                   }
-                  if(ListflagData.bitlyFlag){ 
+                  if(ListflagData.bitlyFlag == "True"){ 
                    example(tagnot.replace(/&demoyou/g, ''));
                   }else{
                     exampless(tagnot.replace(/&demoyou/g, ''));
@@ -435,7 +441,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                         }
                       }
                       if(tagnot != undefined){
-					   if(ListflagData.bitlyFlag){ 
+					   if(ListflagData.bitlyFlag == "True"){ 
 						  if(tagnot.match(/flipkart.com/g)){
 							example3(tagnot.replace(/%25/g,'%'));
 						  }else{
@@ -499,7 +505,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                           tagnot= tagnotFlipkart.concat('?affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat');
                         }
         
-                        if(ListflagData.bitlyFlag){ 
+                        if(ListflagData.bitlyFlag == "True"){ 
                           example1(tagnot.replace(/%25/g,'%'));
                       }else{
                         if(tagnot.match(/flipkart.com/g)){
@@ -519,7 +525,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                           }
                         let sstarget= finalLink.join('&').replace(/&demoyou/g, '');
                           tagnot= ("https://linksredirect.com/?cid=76950&subid=kudrat_cl&source=linkkit&url=").concat(encodeURIComponent(sstarget));
-                           if(ListflagData.bitlyFlag){ 
+                           if(ListflagData.bitlyFlag == "True"){ 
                             example1(tagnot.replace(/%25/g,'%'));
                         }else{
                           if(tagnot.match(/flipkart.com/g)){
@@ -625,7 +631,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                      tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
                     }
                    example(tagnot.replace(/&demoyou/g, ''));
-                   if(ListflagData.bitlyFlag){ 
+                   if(ListflagData.bitlyFlag == "True"){ 
                     example6(tagnot.replace(/&demoyou/g, ''));
                    }else{
                      example7(tagnot.replace(/&demoyou/g, ''));
@@ -657,10 +663,8 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                       })
                       .catch(function(err){ console.error('AAAW 👻', err)})
                 }else{
-                  
-//                   final[j] = array[j].replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/FRCP/g,'').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@frcp_deals/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g, ' ').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
                final[j] = array[j].replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/FRCP/g,'').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
-		}
+	              	}
               }
               if(array_length == 1){
 				  
