@@ -293,14 +293,12 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
         connection.query(sqlsss, function (err, flagData) {
           if (err) {
             console.log('err: ', err);
-          setup();
           }
-          let ListflagData = flagData[0];
+        let ListflagData = flagData[0];
         let sqls = "SELECT post_id FROM post_telegram ORDER BY id DESC LIMIT 1";
         connection.query(sqls, function (err, rides) {
           if (err) {
             console.log('err: ', err);
-          setup();
           }
           for (let i = 0; i < lastInsertId - rides[0].post_id; i++) {
             let nextId = rides[0].post_id + i + 1;
@@ -319,62 +317,92 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                     xzhxzh = array[j]
                     }
                   let urls = xzhxzh.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)
-                    //  tall(urls[0], {
-                    //   method: 'HEAD',
-                    //   maxRedirect: 5
-                    // }).then(function(unshortenedUrls){ 
-                    //   let unshortenedUrl = unshortenedUrls.replace(/&amp;/g,'&');
-                      unshort(urls[0]).then(function(unshortenedUrls){ 
+                     unshort(urls[0]).then(function(unshortenedUrls){ 
                         let unshortenedUrl = unshortenedUrls.unshorten.replace(/&amp;/g,'&');
                       console.log('unshortenedUrlsssssss: ', unshortenedUrl);
                     if(unshortenedUrl.match(/amazon.in/g)){
                       let tagnot;
                       if(unshortenedUrl.match(/earnkaro/g)){
                         let finalLink =unshortenedUrl.split('dl=');
-                         if(urlencode(finalLink[1]).match(/[?]/g)){
-                          tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.org_post_tag);
+                          if(conurlencode(finalLink[1]).match(/[?]/g)){
+                          tagnot= conurlencode(finalLink[1]).concat('&tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
                         }else{
-                          tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.org_post_tag);
+                          tagnot= conurlencode(finalLink[1]).concat('?tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
                         }
                       }else if(unshortenedUrl.match(/paisawapas/g)){
                           let finalLink =unshortenedUrl.split('url=');
-                           if(urlencode(finalLink[1]).match(/[?]/g)){
-                            tagnot= urlencode(finalLink[1]).concat('&tag='+ListflagData.org_post_tag);
+                            if(conurlencode(finalLink[1]).match(/[?]/g)){
+                            tagnot= conurlencode(finalLink[1]).concat('&tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
                           }else{
-                            tagnot= urlencode(finalLink[1]).concat('?tag='+ListflagData.org_post_tag);
+                            tagnot= conurlencode(finalLink[1]).concat('?tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
                           }
-                        } else if(unshortenedUrl.match(/tag/g)){
-                    let finalLink =unshortenedUrl.split('&');
-                    for (let h = 0; h < finalLink.length; h++) {
-                      if(finalLink[h].match(/[?]/g)){
-                        if(finalLink[h].match(/tag/g)){
-                          let finalLinkssd =finalLink[h].split('?');
-                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.org_post_tag)
-                        }
-                      }else if(finalLink[h].match(/^ascsubtag/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^keywords/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^ascsub/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^tag/g)){
-                        finalLink[h] = 'tag='+ListflagData.org_post_tag
-                      }
-                    }
-                     tagnot= finalLink.join('&').replace(/@/g, '');
-                    }else{
-                      if(unshortenedUrl.match(/[?]/g)){
-                     tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.org_post_tag);
                       }else{
-                     tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag);
+                    if(conurlencode(unshortenedUrl).match(/[?]/g)){
+                      let finalLink =conurlencode(unshortenedUrl).split('&');
+                      console.log('finalLink: ', finalLink);
+                      for (let h = 0; h < finalLink.length; h++) {
+                        if(finalLink[h].match(/[?]/g)){
+                          if(finalLink[h].match(/tag/g)){
+                            let finalLinkssd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssd[0].concat('?')
+                          }else if(finalLink[h].match(/ascsubtag/g)){
+                            let finalLinkssd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssd[0].concat('?')
+                          } else if(finalLink[h].match(/ascsub/g)){
+                            let finalLinkssd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssd[0].concat('?')
+                          }else if(finalLink[h].match(/keywords/g)){
+                            let finalLinkssdd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssdd[0].concat('?')
+                          }
+                        }else if(finalLink[h].match(/^ascsubtag/g)){
+                          finalLink[h] = "";
+                        }else if(finalLink[h].match(/^tag/g)){
+                          finalLink[h] = ""
+                        }else if(finalLink[h].match(/^ascsub/g)){
+                          finalLink[h] = ""
+                        }else if(finalLink[h].match(/^keywords/g)){
+                          finalLink[h] = ""
+                        }
                       }
+                     
+                    let tagnots= finalLink.join('&').replace(/@/g, '').replace(/&&/g, '&').replace(/([\?][\/])/g, '?').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?');
+                    let tagnotRep= tagnots.replace(/[\?]/g,'?tag='+ListflagData.org_post_tag+'&').replace(/&&/g, '&').replace(/([\?][\/])/g, '?').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?');
+                     if(tagnotRep.charAt(tagnotRep.length-1) == '&'){
+                      tagnot= tagnotRep.slice(0, -1);
+                     }else{
+                      tagnot= tagnotRep;
+                     }
+                    }else{
+                     tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
                     }
-                   example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
-                        async function example(dddd) {
-                          let response =await bitly.shorten(dddd);
-                        final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                        //  postImageWidth(response.link,ListflagData.bestshopping_token);
+                  }
+                  if(ListflagData.bitlyFlag){ 
+                   example(tagnot.replace(/&demoyou/g, ''));
+                  }else{
+                    exampless(tagnot.replace(/&demoyou/g, ''));
+                  }
+				 // async function example(dddd) {
+					//let response =await bitly.shorten(dddd);
+				 // final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, //'and').replace(/;/g, ' ');
+				//	}
+					
+					 async function example(dddd) {
+                    let response = await bitly
+                    .shorten(dddd)
+                    .then(function(result) {
+                      return result;
+                    })
+                    .catch(function(error) {
+                     let responses ={"link":dddd};
+                     return responses;
+                    });
+                        final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link);
+                        
                       }
+                    function exampless(dddd) {  
+                    final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),dddd);
+                    }
                   
 						  }else if(unshortenedUrl.match(/flipkart.com/g) || unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/unacademy.com/g) ||unshortenedUrl.match(/coolwinks.com/g) ||unshortenedUrl.match(/orra.co.in/g) ||unshortenedUrl.match(/360totalsecurity.com/g) ||unshortenedUrl.match(/maxbupa.com/g) ||unshortenedUrl.match(/religarehealthinsurance.com/g) ||unshortenedUrl.match(/fnp.com/g) ||unshortenedUrl.match(/healthxp.in/g) ||unshortenedUrl.match(/bigrock.in/g) ||unshortenedUrl.match(/igp.com/g) ||unshortenedUrl.match(/letyshops.com/g) ||unshortenedUrl.match(/spartanpoker.com/g) ||unshortenedUrl.match(/adda52.com/g) ||unshortenedUrl.match(/balaji/g) ||unshortenedUrl.match(/eduonix.com/g) ||unshortenedUrl.match(/paytmmall.com/g) ||unshortenedUrl.match(/testbook.com/g) ||unshortenedUrl.match(/mamaearth.in/g) ||unshortenedUrl.match(/wonderchef.com/g) ||unshortenedUrl.match(/zee5/g) ||unshortenedUrl.match(/beardo.in/g) ||unshortenedUrl.match(/oneplus.in/g) ||unshortenedUrl.match(/1mg.com/g) ||unshortenedUrl.match(/udemy.com/g) ||unshortenedUrl.match(/hometown.in/g) ||unshortenedUrl.match(/magzter.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/asics.com/g) ||unshortenedUrl.match(/ajio.com/g) ||unshortenedUrl.match(/timesprime.com/g)||unshortenedUrl.match(/themomsco.com/g) ||unshortenedUrl.match(/akbartravels.com/g) ||unshortenedUrl.match(/aliexpress.com/g) ||unshortenedUrl.match(/banggood.in/g) ||unshortenedUrl.match(/bata.in/g) ||unshortenedUrl.match(/behrouzbiryani.com/g) ||unshortenedUrl.match(/biba.in/g) ||unshortenedUrl.match(/bigbasket.com/g) ||unshortenedUrl.match(/brandfactoryonline.com/g) ||unshortenedUrl.match(/chumbak.com/g) ||unshortenedUrl.match(/cleartrip.com/g) ||unshortenedUrl.match(/clovia.com/g) ||unshortenedUrl.match(/croma.com/g) ||unshortenedUrl.match(/decathlon.in/g) ||unshortenedUrl.match(/dominos.co.in/g) ||unshortenedUrl.match(/etihad.com/g) ||unshortenedUrl.match(/faasos.io/g) ||unshortenedUrl.match(/fabhotels.com/g) ||unshortenedUrl.match(/firstcry.com/g) ||unshortenedUrl.match(/fossil.com/g) ||unshortenedUrl.match(/harmanaudio.in/g) ||unshortenedUrl.match(/hungama.com/g) ||unshortenedUrl.match(/insider.in/g) ||unshortenedUrl.match(/jockeyindia.com/g) ||unshortenedUrl.match(/kalkifashion.com/g) ||unshortenedUrl.match(/lenskart.com/g) ||unshortenedUrl.match(/lifestylestores.com/g) ||unshortenedUrl.match(/limeroad.com/g) ||unshortenedUrl.match(/manyavar.com/g) ||unshortenedUrl.match(/mcdonaldsindia.com/g) ||unshortenedUrl.match(/medlife.com/g) ||unshortenedUrl.match(/microsoft.com/g) ||unshortenedUrl.match(/mivi.in/g) ||unshortenedUrl.match(/makemytrip.com/g) ||unshortenedUrl.match(/myntra.com/g) ||unshortenedUrl.match(/nnnow.com/g) ||unshortenedUrl.match(/nykaafashion.com/g) ||unshortenedUrl.match(/oyorooms.com/g) ||unshortenedUrl.match(/pepperfry.com/g) ||unshortenedUrl.match(/pizzahut.co.in/g) ||unshortenedUrl.match(/puma.com/g) ||unshortenedUrl.match(/qatarairways.com/g) ||unshortenedUrl.match(/rentomojo.com/g) ||unshortenedUrl.match(/samsung.com/g) ||unshortenedUrl.match(/singaporeair.com/g) ||unshortenedUrl.match(/sochstore.com/g) ||unshortenedUrl.match(/tanishq.co.in/g) ||unshortenedUrl.match(/themancompany.com/g) ||unshortenedUrl.match(/zivame.com/g) ||unshortenedUrl.match(/zoomcar.com/g) ){
                    
@@ -397,15 +425,6 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                           tagnot= ListflagDatass[k].Landing_Page.concat("?subid="+ListflagData.admitad_post_tag+"&ulp=").concat(urldecode(finalLink[1]));
                         }
                       }
-                    // }else{
-                    //     tall(unshortenedUrl, {
-                    //       method: 'HEAD',
-                    //       maxRedirect: 10
-                    //     }).then(function(unshortenedUrls){ 
-                    //       console.log('unshortenedUrls: ', unshortenedUrls);
-                    //     })
-                    // .catch(function(err){ console.error('AAAW 👻', err)})
-                    //   }
                       }else{
                         quelink = unshortenedUrl;
                         for (let t = 0; t < ListflagDatass.length; t++) {
@@ -416,9 +435,80 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                         }
                       }
                       if(tagnot != undefined){
-                      example(tagnot.replace(/%25/g,'%'));
+					   if(ListflagData.bitlyFlag){ 
+						  if(tagnot.match(/flipkart.com/g)){
+							example3(tagnot.replace(/%25/g,'%'));
+						  }else{
+							example1(tagnot.replace(/%25/g,'%'));
+						  }
+						  }else{
+							example2(tagnot.replace(/%25/g,'%'));
+						  }
                        }else{
                         if(urlencode(quelink).match(/flipkart.com/g)){
+                          if(ListflagData.flipkart_server == 'dirflipkart'){
+                            console.log('ListflagData.kudart_token: ', ListflagData.flipkart_server );
+
+                          let tagnotFlipkart;
+                          if(quelink.match(/www.flipkart.com/g)){
+                            tagnotFlipkart = conurlencode(quelink).replace(/www.flipkart.com/g, 'dl.flipkart.com/dl');
+                          }else{
+                            tagnotFlipkart = conurlencode(quelink);
+                          }
+                          if(tagnotFlipkart.match(/[?]/g)){
+                          let finalLink =tagnotFlipkart.split('&');
+                          console.log('finalLink: ', finalLink);
+                          for (let h = 0; h < finalLink.length; h++) {
+                            if(finalLink[h].match(/[?]/g)){
+                              if(finalLink[h].match(/affid/g)){
+                                let finalLinkssd =finalLink[h].split('?');
+                                finalLink[h] = finalLinkssd[0].concat('?')
+                              }else if(finalLink[h].match(/affExtParam1/g)){
+                                let finalLinkssd =finalLink[h].split('?');
+                                finalLink[h] = finalLinkssd[0].concat('?')
+                              } else if(finalLink[h].match(/affExtParam2/g)){
+                                let finalLinkssd =finalLink[h].split('?');
+                                finalLink[h] = finalLinkssd[0].concat('?')
+                              }
+                            }else if(finalLink[h].match(/^affExtParam1/g)){
+                              finalLink[h] = "";
+                            }else if(finalLink[h].match(/^affExtParam2/g)){
+                              finalLink[h] = ""
+                            }else if(finalLink[h].match(/^affid/g)){
+                              finalLink[h] = ""
+                            }
+                          }
+                          var dateObj = new Date();
+                          var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                          var day = dateObj.getUTCDate();
+                          var year = dateObj.getUTCFullYear();
+                          var hour = dateObj.getHours();
+                          var minu = dateObj.getMinutes();
+                          let ren = Math.random().toString(36).substring(7);
+                        let tagnots= finalLink.join('&').replace(/@/g, '').replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
+                        tagnot= tagnots.concat('&affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat').replace(/(\?&)/g, '?').replace(/&&/g, '&');
+                          console.log('tagnot: ', tagnot);
+                        }else{
+                          var dateObj = new Date();
+                                var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                                var day = dateObj.getUTCDate();
+                                var year = dateObj.getUTCFullYear();
+                                var hour = dateObj.getHours();
+                                var minu = dateObj.getMinutes();
+                                let ren = Math.random().toString(36).substring(7);
+                          tagnot= tagnotFlipkart.concat('?affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat');
+                        }
+        
+                        if(ListflagData.bitlyFlag){ 
+                          example1(tagnot.replace(/%25/g,'%'));
+                      }else{
+                        if(tagnot.match(/flipkart.com/g)){
+                          example4(tagnot.replace(/%25/g,'%'));
+                        }else{
+                          example2(tagnot.replace(/%25/g,'%'));
+                        }
+                      }
+                        }else if(ListflagData.flipkart_server == 'quelink'){
                           let finalLink =urlencode(quelink).split('&');
                           for (let h = 0; h < finalLink.length; h++) {
                             if(finalLink[h].match(/^affid/g)){
@@ -429,119 +519,135 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                           }
                         let sstarget= finalLink.join('&').replace(/&demoyou/g, '');
                           tagnot= ("https://linksredirect.com/?cid=76950&subid=kudrat_cl&source=linkkit&url=").concat(encodeURIComponent(sstarget));
-                           example(tagnot.replace(/[[]/g,'%5B').replace(/[]]/g,'%5D'));
+                           if(ListflagData.bitlyFlag){ 
+                            example1(tagnot.replace(/%25/g,'%'));
+                        }else{
+                          if(tagnot.match(/flipkart.com/g)){
+                            example4(tagnot.replace(/%25/g,'%'));
+                          }else{
+                            example2(tagnot.replace(/%25/g,'%'));
+                          }
+                        }
                         }
                       }
-                      async function example(dddd) {
+                    }
+
+                      async function example1(dddd) {
                         let response =await bitly.shorten(dddd);
                       final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
                     }
-                  })
-                    }
-//                     else if(unshortenedUrl.match(/flipkart.com/g)){
-//                       let tagnotFlipkart;
-//                       if(unshortenedUrl.match(/www.flipkart.com/g)){
-//                         tagnotFlipkart = unshortenedUrl.replace(/www.flipkart.com/g, 'dl.flipkart.com/dl');
-//                       }else{
-//                         tagnotFlipkart = unshortenedUrl;
-//                       }
-//                       if(tagnotFlipkart.match(/[?]/g)){
-//                       let finalLink =tagnotFlipkart.split('&');
-//                       console.log('finalLink: ', finalLink);
-//                       for (let h = 0; h < finalLink.length; h++) {
-//                         if(finalLink[h].match(/[?]/g)){
-//                           if(finalLink[h].match(/affid/g)){
-//                             let finalLinkssd =finalLink[h].split('?');
-//                             finalLink[h] = finalLinkssd[0].concat('?')
-//                           }else if(finalLink[h].match(/affExtParam1/g)){
-//                             let finalLinkssd =finalLink[h].split('?');
-//                             finalLink[h] = finalLinkssd[0].concat('?')
-//                           } else if(finalLink[h].match(/affExtParam2/g)){
-//                             let finalLinkssd =finalLink[h].split('?');
-//                             finalLink[h] = finalLinkssd[0].concat('?')
-//                           }
-//                         }else if(finalLink[h].match(/^affExtParam1/g)){
-//                           finalLink[h] = "";
-//                         }else if(finalLink[h].match(/^affExtParam2/g)){
-//                           finalLink[h] = ""
-//                         }else if(finalLink[h].match(/^affid/g)){
-//                           finalLink[h] = ""
-//                         }
-//                       }
-//                       var dateObj = new Date();
-//                       var month = dateObj.getUTCMonth() + 1; //months from 1-12
-//                       var day = dateObj.getUTCDate();
-//                       var year = dateObj.getUTCFullYear();
-//                       var hour = dateObj.getHours();
-//                       var minu = dateObj.getMinutes();
-//                       let ren = Math.random().toString(36).substring(7);
-//                     let tagnots= finalLink.join('&').replace(/@/g, '').replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
-//                     tagnot= tagnots.concat('&affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat').replace(/(\?&)/g, '?').replace(/&&/g, '&');
-//                      console.log('tagnot: ', tagnot);
-//                     }
-//                     else{
-//                       var dateObj = new Date();
-//                             var month = dateObj.getUTCMonth() + 1; //months from 1-12
-//                             var day = dateObj.getUTCDate();
-//                             var year = dateObj.getUTCFullYear();
-//                             var hour = dateObj.getHours();
-//                             var minu = dateObj.getMinutes();
-//                             let ren = Math.random().toString(36).substring(7);
-//                      tagnot= tagnotFlipkart.concat('?affid=siqra1446').concat('&affExtParam1='+month+day+year+'cl'+hour+minu+ren).concat('&affExtParam2=FK_Kudrat');
-//                     }
+                    async function example3(dddd) {
+                      let response = await bitly
+                      .shorten(dddd)
+                      .then(function(result) {
+                        return result;
+                      })
+                      .catch(function(error) {
+                       let jjjh =  unshort(dddd).then(function(unshortenedUrls){ 
+                         let responses;
+                         if(unshortenedUrls.unshorten.match(/www.flipkart.com/g)){
+                         responses ={"link":unshortenedUrls.unshorten.replace(/www.flipkart.com/g, 'dl.flipkart.com/dl')};
+                          }else{
+                         responses ={"link":unshortenedUrls.unshorten};
+                          }
+                         return responses;
+                      })
+                      .catch(function(err){ return err;})
+                      return jjjh;
   
-//                      example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
-//                         async function example(dddd) {
-//                           console.log('dddd: ', dddd);
-//                           let response =await bitly.shorten(dddd);
-//                         final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-//                         console.log('final[j]: ', final[j]);
-//                         //  postImageWidth(response.link,ListflagData.bestshopping_token);
-//                       }
-//                     }
-					    else{
-                      // tall(unshortenedUrl, {
-                      //   method: 'HEAD',
-                      //   maxRedirect: 5
-                      // }).then(function(unshortenedUrls){ 
-                      // let unshortenedUrl = unshortenedUrls.replace(/&amp;/g,'&');
+                      });
+                        final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link);
+                      }
+                       function example4(dddd) {
+                         console.log('dddd: ', dddd);
+                         let response =  unshort(dddd).then(function(unshortenedUrls){ 
+                           console.log('unshortenedUrls: ', unshortenedUrls);
+                           let responses;
+                           if(unshortenedUrls.unshorten.match(/www.flipkart.com/g)){
+                           responses ={"link":unshortenedUrls.unshorten.replace(/www.flipkart.com/g, 'dl.flipkart.com/dl')};
+                            }else{
+                           responses ={"link":unshortenedUrls.unshorten};
+                            }
+                          final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),responses.link);
+                        })
+                        .catch(function(err){ return err;})
+                        }
 
+                        function example2(dddd) {
+                          let response =  unshort(dddd).then(function(unshortenedUrls){ 
+                           final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),unshortenedUrls.unshorten);
+                         })
+                         .catch(function(err){ return err;})
+                         }
+                  })
+                    }else{
                       unshort(unshortenedUrl).then(function(unshortenedUrls){ 
                         let unshortenedUrl = unshortenedUrls.unshorten.replace(/&amp;/g,'&');
                       if(unshortenedUrl.match(/amazon.in/g)){
-                        let tagnot;
-                        if(unshortenedUrl.match(/tag/g)){
+					 let tagnot;
+                    if(unshortenedUrl.match(/[?]/g)){
                       let finalLink =unshortenedUrl.split('&');
-                     for (let h = 0; h < finalLink.length; h++) {
-                      if(finalLink[h].match(/[?]/g)){
-                        if(finalLink[h].match(/tag/g)){
-                          let finalLinkssd =finalLink[h].split('?');
-                          finalLink[h] = finalLinkssd[0].concat('?tag='+ListflagData.org_post_tag)
+                      console.log('finalLink: ', finalLink);
+                      for (let h = 0; h < finalLink.length; h++) {
+                        if(finalLink[h].match(/[?]/g)){
+                          if(finalLink[h].match(/tag/g)){
+                            let finalLinkssd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssd[0].concat('?')
+                          }else if(finalLink[h].match(/ascsubtag/g)){
+                            let finalLinkssd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssd[0].concat('?')
+                          } else if(finalLink[h].match(/ascsub/g)){
+                            let finalLinkssd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssd[0].concat('?')
+                          }else if(finalLink[h].match(/keywords/g)){
+                            let finalLinkssdd =finalLink[h].split('?');
+                            finalLink[h] = finalLinkssdd[0].concat('?')
+                          }
+                        }else if(finalLink[h].match(/^ascsubtag/g)){
+                          finalLink[h] = "";
+                        }else if(finalLink[h].match(/^tag/g)){
+                          finalLink[h] = ""
+                        }else if(finalLink[h].match(/^ascsub/g)){
+                          finalLink[h] = ""
+                        }else if(finalLink[h].match(/^keywords/g)){
+                          finalLink[h] = ""
                         }
-                      }else if(finalLink[h].match(/^ascsubtag/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^keywords/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^ascsub/g)){
-                        finalLink[h] = 'demoyou'
-                      }else if(finalLink[h].match(/^tag/g)){
-                        finalLink[h] = 'tag='+ListflagData.org_post_tag
                       }
-                    }
-                     tagnot= finalLink.join('&').replace(/@/g, '');
+                     
+                    let tagnots= finalLink.join('&').replace(/@/g, '').replace(/&&/g, '&').replace(/([\?][\/])/g, '?').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
+                    let tagnotRep= tagnots.replace(/[\?]/g,'?tag='+ListflagData.org_post_tag+'&').replace(/&&/g, '&').replace(/([\?][\/])/g, '?').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
+                     if(tagnotRep.charAt(tagnotRep.length-1) == '&'){
+                      tagnot= tagnotRep.slice(0, -1);
+                     }else{
+                      tagnot= tagnotRep;
+                     }
                     }else{
-                     if(unshortenedUrl.match(/[?]/g)){
-                      tagnot= unshortenedUrl.replace(/@/g, '').concat('&tag='+ListflagData.org_post_tag);
-                       }else{
-                      tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag);
-                       }
+                     tagnot= unshortenedUrl.replace(/@/g, '').concat('?tag='+ListflagData.org_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&').replace(/([\/][\?])/g, '?').replace(/([\?][\/])/g, '?');
                     }
-                   example(tagnot.replace(/&demoyou/g, '').replace(/%25/g,'%'));
-                          async function example(dddd) {
-                            let response =await bitly.shorten(dddd);
-                          final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link).replace(/.#x...../g,' %E2%99%A8 ').replace(/&/g, 'and').replace(/;/g, ' ');
-                            //  postImageWidth(response.link,ListflagData.bestshopping_token);
-                        }
+                   example(tagnot.replace(/&demoyou/g, ''));
+                   if(ListflagData.bitlyFlag){ 
+                    example6(tagnot.replace(/&demoyou/g, ''));
+                   }else{
+                     example7(tagnot.replace(/&demoyou/g, ''));
+                   }
+                     async function example6(dddd) {
+                    let response = await bitly
+                    .shorten(dddd)
+                    .then(function(result) {
+                      return result;
+                    })
+                    .catch(function(error) {
+                     let responses ={"link":dddd};
+                     return responses;
+                    });
+                        final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),response.link);
+                        
+                      }
+                     function example7(dddd) {  
+                     final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),dddd);
+                   }  
+						
+						
                       }else{
                         final[j] = ' ';
                       }
@@ -566,24 +672,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
               if(finalAmazon.match(/amzn.to/g)){
               postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList);
               }else{
-            //     let finalIdList = JSON.parse(ListflagData.array_data).user;
-            //     let insertFeild = [rides[0].post_id + i, JSON.stringify(finalAmazon.replace(/[^0-9a-zA-Zㄱ-힣+×÷=%♤♡☆♧)(*&^/~#@!-:;,?`_|<>{}¥£€$◇■□●○•°※¤《》¡¿₩\[\]\"\' \\]/g ,""))]
-            //     let sqlss = "INSERT INTO post_telegram (post_id,data) VALUES (" + nextId + "," + JSON.stringify(finalAmazon.replace(/[^0-9a-zA-Zㄱ-힣+×÷=%♤♡☆♧)(*&^/~#@!-:;,?`_|<>{}¥£€$◇■□●○•°※¤《》¡¿₩\[\]\"\' \\]/g ,"")) + ")";
-            //     connection.query(sqlss, [insertFeild], function (err, rides) {
-            //       if (err) {
-            //         console.log('err: ', err);
-            //       }else{
-            //     let photoImg = "";
-            //       whatsapp_posts1(finalAmazon,photoImg, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
-            //       whatsapp_posts2(finalAmazon,photoImg, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
-            //   }
-            // })
-
-
-
-
-
-
+         
               let finalAmazon = final.join('\n');
             if(finalAmazon.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)){
               let finalIdList = JSON.parse(ListflagData.array_data).user;
@@ -964,9 +1053,6 @@ function whatsapp_posts2(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
       }
     }
   }
-
-
-
 module.exports = router;
 
 
