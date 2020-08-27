@@ -247,7 +247,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
 
           $('.tgme_widget_message_wrap').each((i, el) => {
             var linkss = $(el).find('.tgme_widget_message_footer').find('a').attr('href').split('/');
-            var link = htmlToText.fromString($(el).find('.tgme_widget_message_text').html());
+            var link = htmlToText.fromString($(el).find('div >.js-message_text').html());
             matchObj.push({ id: Number(linkss[4]), text_data: emmoji(link) })
           });
 
