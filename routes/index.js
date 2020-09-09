@@ -22,7 +22,9 @@ router.get('/', function (req, res, next) {
 });
 
 // function postImageWidth(post_link,token) {
-function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegroup) {
+// function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegroup) {
+function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegroup,teleFlag,wattsflag,finalIdList) {
+
   axios(post_link)
   // axios('https://www.amazon.in/dp/B07DJD1RTM')
       .then(response => {
@@ -49,6 +51,9 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
             if (err) {
             console.log('err: ', err);
             }else{
+          if((teleFlag == '1' && wattsflag == '1') || (teleFlag == '1' && wattsflag == '0' ) || (teleFlag == '0' && wattsflag == '1' ) ){
+                whatsapp_posts1(finalAmznData, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
+                whatsapp_posts2(finalAmznData, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
           if(siteheadidsdng && siteheading && sitestrckprice && sitestrckpricessds && savepercent ){
               telePost(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
               telePostgujarat(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
@@ -68,6 +73,9 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
             teleAutoPostChannel(finalAmznData,"@bestshoppingdl",token);
             teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
           }
+	 }else{
+          console.log('---4');
+        }
         }
       })
     })
@@ -77,11 +85,18 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
           if (err) {
           console.log('err: ', err);
           }else{
+	   if((teleFlag == '1' && wattsflag == '1') || (teleFlag == '1' && wattsflag == '0' ) || (teleFlag == '0' && wattsflag == '1' ) ){
+      whatsapp_posts1(finalAmznData, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
+      whatsapp_posts2(finalAmznData, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
+        
         for (let l = 0; l < telegroup.length; l++) {
           teleAutoPostChannel(finalAmznData,telegroup[l].groupname,amzn_data);
         }
         teleAutoPostChannel(finalAmznData,"@bestshoppingdl",token);
         teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
+      }else{
+        console.log('---4');
+      }
       }
     })
       });
@@ -721,7 +736,8 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
               let finalIdListed = JSON.parse(ListflagData.array_data).user;
              let finalPostList = JSON.parse(ListflagData.amzn_tele_value).telenogroup;
               if(finalAmazon.match(/amzn.to/g)){
-              postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList);
+//               postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList);
+		 postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList,ListflagData.ihd_tele_flag,ListflagData.ihd_watts_flag,finalIdListed);
               }else{
          
               let finalAmazon = final.join('\n');
