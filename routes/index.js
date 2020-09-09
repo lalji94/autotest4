@@ -54,6 +54,11 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
 //           if((teleFlag == '1' && wattsflag == '1') || (teleFlag == '1' && wattsflag == '0' ) || (teleFlag == '0' && wattsflag == '1' ) ){
 //                 whatsapp_posts1(finalAmznData, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
 //                 whatsapp_posts2(finalAmznData, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
+		    if((teleFlag == '1' && wattsflag == '1')  || (teleFlag == '0' && wattsflag == '1' ) ){
+                whatsapp_posts1(finalAmznData, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
+                whatsapp_posts2(finalAmznData, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
+              }
+              if(teleFlag == '1' ){
           if(siteheadidsdng && siteheading && sitestrckprice && sitestrckpricessds && savepercent ){
               telePost(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
               telePostgujarat(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
@@ -75,7 +80,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
           }
 // 	 }else{
 //           console.log('---4');
-//         }
+        }
         }
       })
     })
@@ -88,7 +93,11 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
 // 	   if((teleFlag == '1' && wattsflag == '1') || (teleFlag == '1' && wattsflag == '0' ) || (teleFlag == '0' && wattsflag == '1' ) ){
 //       whatsapp_posts1(finalAmznData, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
 //       whatsapp_posts2(finalAmznData, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
-        
+        if((teleFlag == '1' && wattsflag == '1')  || (teleFlag == '0' && wattsflag == '1' ) ){
+	whatsapp_posts1(finalAmznData, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
+	whatsapp_posts2(finalAmznData, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
+      }
+      if(teleFlag == '1' ){
         for (let l = 0; l < telegroup.length; l++) {
           teleAutoPostChannel(finalAmznData,telegroup[l].groupname,amzn_data);
         }
@@ -96,7 +105,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
         teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
 //       }else{
 //         console.log('---4');
-//       }
+      }
       }
     })
       });
@@ -950,6 +959,11 @@ function urlencodedd(str) {
   }
 
 function whatsapp_posts1(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
+	console.log("yes working");
+	console.log("yes working1",AmazonMsg);
+	console.log("yes working1",Amznapi);
+	console.log("yes working3",Amznphoneid);
+	console.log("yes working4",Amznprodid);
       let arrayGroupNumber = [
         {
           "name": "Amazon Offer Alert - 1🛍🛒🔥",
