@@ -394,6 +394,8 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                           finalLink[h] = ""
                         }else if(finalLink[h].match(/^keywords/g)){
                           finalLink[h] = ""
+                         }else if(finalLink[h].match(/^k/g)){
+                          finalLink[h] = ""
                         }
                       }
                      
