@@ -1050,30 +1050,52 @@ function whatsapp_posts1(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
       const months = ["🛍 ", "🛒 ", "🔥 ", "💰 ", "🛍️ ", "🤑 ", "🏷️ ", "💳 ", "🎟️ ","📦 ","😍 ","🕯 ","🍂 ","🎌 ","👑 ","🎊 ","🐦 ","⛄ "];
       const randomMonth = months[Math.floor(Math.random() * months.length)];
      
-      for (let i = 0; i < arrayGroupNumber.length; i++) {
-        var ggff = urlencodedd(AmazonMsg);
-        if(ggff != 'null' && ggff != 'undefined' ){
-        let requestHeaders1 = {
-          "Content-Type": "application/json",
-          "accept": "application/json",
-          "x-maytapi-key": Amznapi
-        }
+//       for (let i = 0; i < arrayGroupNumber.length; i++) {
+//         var ggff = urlencodedd(AmazonMsg);
+//         if(ggff != 'null' && ggff != 'undefined' ){
+//         let requestHeaders1 = {
+//           "Content-Type": "application/json",
+//           "accept": "application/json",
+//           "x-maytapi-key": Amznapi
+//         }
 
-        let linkRequest1 = {
-          "to_number": arrayGroupNumber[i].id,
-          "type": "text",
-          "message": randomMonth + ggff
-        }
-        request({
-          uri: "https://api.maytapi.com/api/" + Amznprodid + "/" + Amznphoneid + "/sendMessage",
-          method: "POST",
-          body: JSON.stringify(linkRequest1),
-          headers: requestHeaders1
-        }, (err, response, body) => {
-          let link = JSON.parse(body);
-        })
-      }
-    }
+//         let linkRequest1 = {
+//           "to_number": arrayGroupNumber[i].id,
+//           "type": "text",
+//           "message": randomMonth + ggff
+//         }
+//         request({
+//           uri: "https://api.maytapi.com/api/" + Amznprodid + "/" + Amznphoneid + "/sendMessage",
+//           method: "POST",
+//           body: JSON.stringify(linkRequest1),
+//           headers: requestHeaders1
+//         }, (err, response, body) => {
+//           let link = JSON.parse(body);
+//         })
+//       }
+//     }
+	for (let i = 0; i < arrayGroupNumber.length; i++) {
+	  var ggff = urlencodedd(AmazonMsg);
+	  if(ggff != 'null' && ggff != 'undefined' ){
+	  let requestHeaders1 = {
+	    "Content-Type": "application/json",
+	    "accept": "application/json"
+	  }
+	  let linkRequest1;
+	  linkRequest1 = {
+	    "chatId": arrayGroupNumber[i].id,
+	    "body": randomMonth + ggff
+	  }
+	  request({
+	    uri: "https://api.chat-api.com/"+Amznphoneid+"/sendFile?token="+ Amznprodid,
+	    method: "POST",
+	    body: JSON.stringify(linkRequest1),
+	    headers: requestHeaders1
+	  }, (err, response, body) => {
+	    let link = JSON.parse(body);
+	  })
+	}
+	}
   }
 
 function whatsapp_posts2(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
@@ -1131,31 +1153,53 @@ function whatsapp_posts2(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
       const randomMonth = months[Math.floor(Math.random() * months.length)];
 
 
-      for (let i = 0; i < arrayGroupNumber.length; i++) {
-        var ggff = urlencodedd(AmazonMsg);
+//       for (let i = 0; i < arrayGroupNumber.length; i++) {
+//         var ggff = urlencodedd(AmazonMsg);
 
-        if(ggff != 'null' && ggff != 'undefined' ){
-        let requestHeaders1 = {
-          "Content-Type": "application/json",
-          "accept": "application/json",
-          "x-maytapi-key": Amznapi
-        }
+//         if(ggff != 'null' && ggff != 'undefined' ){
+//         let requestHeaders1 = {
+//           "Content-Type": "application/json",
+//           "accept": "application/json",
+//           "x-maytapi-key": Amznapi
+//         }
 
-        let linkRequest1 = {
-          "to_number": arrayGroupNumber[i].id,
-          "type": "text",
-          "message": randomMonth + ggff
-        }
-        request({
-          uri: "https://api.maytapi.com/api/" + Amznprodid + "/" + Amznphoneid + "/sendMessage",
-          method: "POST",
-          body: JSON.stringify(linkRequest1),
-          headers: requestHeaders1
-        }, (err, response, body) => {
-          let link = JSON.parse(body);
-        })
-      }
-    }
+//         let linkRequest1 = {
+//           "to_number": arrayGroupNumber[i].id,
+//           "type": "text",
+//           "message": randomMonth + ggff
+//         }
+//         request({
+//           uri: "https://api.maytapi.com/api/" + Amznprodid + "/" + Amznphoneid + "/sendMessage",
+//           method: "POST",
+//           body: JSON.stringify(linkRequest1),
+//           headers: requestHeaders1
+//         }, (err, response, body) => {
+//           let link = JSON.parse(body);
+//         })
+//       }
+//     }
+	for (let i = 0; i < arrayGroupNumber.length; i++) {
+	  var ggff = urlencodedd(AmazonMsg);
+	  if(ggff != 'null' && ggff != 'undefined' ){
+	  let requestHeaders1 = {
+	    "Content-Type": "application/json",
+	    "accept": "application/json"
+	  }
+	  let linkRequest1;
+	  linkRequest1 = {
+	    "chatId": arrayGroupNumber[i].id,
+	    "body": randomMonth + ggff
+	  }
+	  request({
+	    uri: "https://api.chat-api.com/"+Amznphoneid+"/sendFile?token="+ Amznprodid,
+	    method: "POST",
+	    body: JSON.stringify(linkRequest1),
+	    headers: requestHeaders1
+	  }, (err, response, body) => {
+	    let link = JSON.parse(body);
+	  })
+	}
+	}
   }
 module.exports = router;
 
