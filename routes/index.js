@@ -1092,6 +1092,8 @@ function whatsapp_posts1(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
 	    body: JSON.stringify(linkRequest1),
 	    headers: requestHeaders1
 	  }, (err, response, body) => {
+		  console.log('sss',body);
+		  console.log('errrr',err);
 	    let link = JSON.parse(body);
 	  })
 	}
