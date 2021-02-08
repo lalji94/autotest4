@@ -1087,7 +1087,7 @@ function whatsapp_posts1(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
 	    "body": randomMonth + ggff
 	  }
 	  request({
-	    uri: "https://api.chat-api.com/"+Amznphoneid+"/sendFile?token="+ Amznprodid,
+	    uri: "https://api.chat-api.com/"+Amznphoneid+"/sendMessage?token="+ Amznprodid,
 	    method: "POST",
 	    body: JSON.stringify(linkRequest1),
 	    headers: requestHeaders1
@@ -1193,7 +1193,7 @@ function whatsapp_posts2(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
 	    "body": randomMonth + ggff
 	  }
 	  request({
-	    uri: "https://api.chat-api.com/"+Amznphoneid+"/sendFile?token="+ Amznprodid,
+	    uri: "https://api.chat-api.com/"+Amznphoneid+"/sendMessage?token="+ Amznprodid,
 	    method: "POST",
 	    body: JSON.stringify(linkRequest1),
 	    headers: requestHeaders1
