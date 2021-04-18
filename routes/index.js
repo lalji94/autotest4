@@ -110,6 +110,20 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
     })
       });
     }
+
+	setInterval( function setup() {
+	  let sqlsss = "SELECT * FROM post_flags";
+	  connection.query(sqlsss, function (err, tagChangeRandom) {
+	//     console.log('tagChangeRandom: ', tagChangeRandom[0].tag_switch);
+	//     var a = moment().utcOffset("+05:30").format("HH:mm");
+	//     if(a == "02:00"||a == "04:00"||a == "06:00"||a == "08:00"||a == "10:00"||a == "12:00"||a == "14:00"||a == "16:00"||a == "18:00"||a == "20:00"||a == "22:00"||a == "23:59" ){
+	//       console.log("a");
+	//     }else{
+	//       console.log("b");
+	//     }
+	      })
+	}, 19000)
+
     function telePostgujarat (token,post_img,post_title,post_regularPrice,post_sellPrice,savepercent,post_link,avilabilty) {
       var chatId = '@bestshoppingdl'; // <= replace with yours
       // var savings = post_regularPrice - post_sellPrice;
