@@ -778,8 +778,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
               let finalIdListed = JSON.parse(ListflagData.array_data).user;
              let finalPostList = JSON.parse(ListflagData.amzn_tele_value).telenogroup;
               if(finalAmazon.match(/amzn.to/g)){
-//               postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList);
-		 postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList,ListflagData.ihd_tele_flag,ListflagData.ihd_watts_flag,finalIdListed);
+//                 postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList,ListflagData.ihd_tele_flag,ListflagData.ihd_watts_flag,finalIdListed);
               }else{
          
               let finalAmazon = final.join('\n');
