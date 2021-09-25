@@ -862,10 +862,10 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                       // teleAutoPost(finalAmazon);
                     // }
                   }
-	          	if(finalAmazon.match(/amzn.to/g)){
-                  teleAutoPostChannel(finalAmazon,"@bestshoppingdl",ListflagData.kudart_token);
-                  teleAutoPostChannel(finalAmazon,"@bestshoppingdeal00",ListflagData.kudart_token);
-               }
+// 	          	if(finalAmazon.match(/amzn.to/g)){
+//                   teleAutoPostChannel(finalAmazon,"@bestshoppingdl",ListflagData.kudart_token);
+//                   teleAutoPostChannel(finalAmazon,"@bestshoppingdeal00",ListflagData.kudart_token);
+//                }
                   whatsapp_posts1(finalAmazon, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
                   whatsapp_posts2(finalAmazon, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
                 }else if(ListflagData.ihd_tele_flag == '1' && ListflagData.ihd_watts_flag == '0' ){
@@ -875,10 +875,10 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                       // teleAutoPost(finalAmazon);
                     // }
                   }
-		           if(finalAmazon.match(/amzn.to/g)){
-                  teleAutoPostChannel(finalAmazon,"@bestshoppingdl",ListflagData.kudart_token);
-                  teleAutoPostChannel(finalAmazon,"@bestshoppingdeal00",ListflagData.kudart_token);
-               }
+// 		           if(finalAmazon.match(/amzn.to/g)){
+//                   teleAutoPostChannel(finalAmazon,"@bestshoppingdl",ListflagData.kudart_token);
+//                   teleAutoPostChannel(finalAmazon,"@bestshoppingdeal00",ListflagData.kudart_token);
+//                }
                 }else if(ListflagData.ihd_tele_flag == '0' && ListflagData.ihd_watts_flag == '1' ){
                   whatsapp_posts1(finalAmazon, finalIdList[0].apiKey,finalIdList[0].phoneId,finalIdList[0].productId);
                   whatsapp_posts2(finalAmazon, finalIdList[1].apiKey,finalIdList[1].phoneId,finalIdList[1].productId);
