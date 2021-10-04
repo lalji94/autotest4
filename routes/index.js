@@ -75,8 +75,8 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
             for (let l = 0; l < telegroup.length; l++) {
                 teleAutoPostChannel(finalAmznData,telegroup[l].groupname,amzn_data);
             }
-            teleAutoPostChannel(finalAmznData,"@bestshoppingdl",token);
-            teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
+          //  teleAutoPostChannel(finalAmznData,"@bestshoppingdl",token);
+          //  teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
           }
 // 	 }else{
 //           console.log('---4');
@@ -101,8 +101,8 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
         for (let l = 0; l < telegroup.length; l++) {
           teleAutoPostChannel(finalAmznData,telegroup[l].groupname,amzn_data);
         }
-        teleAutoPostChannel(finalAmznData,"@bestshoppingdl",token);
-        teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
+      //  teleAutoPostChannel(finalAmznData,"@bestshoppingdl",token);
+      //  teleAutoPostChannel(finalAmznData,"@bestshoppingdeal00",token);
 //       }else{
 //         console.log('---4');
       }
@@ -767,7 +767,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
                       .catch(function(err){ console.error('AAAW 👻', err)})
                 }else{
 //                final[j] = array[j].replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/FRCP/g,'').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
-	        final[j] = array[j].replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/Offerzone/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@Offerzone_deals/g,'').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
+	        final[j] = array[j].replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/F . R . C . P ./g,'').replace(/Offerzone/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@Offerzone_deals/g,'').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
 		}
               }
               if(array_length == 1){
@@ -778,7 +778,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
               let finalIdListed = JSON.parse(ListflagData.array_data).user;
              let finalPostList = JSON.parse(ListflagData.amzn_tele_value).telenogroup;
               if(finalAmazon.match(/amzn.to/g)){
-//                 postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList,ListflagData.ihd_tele_flag,ListflagData.ihd_watts_flag,finalIdListed);
+                 postImageWidth(getUrlPost[0],ListflagData.bestshopping_token,ListflagData.kudart_token,nextId,finalAmazon,finalPostList,ListflagData.ihd_tele_flag,ListflagData.ihd_watts_flag,finalIdListed);
               }else{
          
               let finalAmazon = final.join('\n');
