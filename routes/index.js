@@ -60,14 +60,14 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
               }
               if(teleFlag == '1' ){
           if(siteheadidsdng && siteheading && sitestrckprice && sitestrckpricessds && savepercent ){
-              telePost(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
-              telePostgujarat(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
+//               telePost(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
+//               telePostgujarat(token,siteheadidsdng,siteheading,sitestrckprice,sitestrckpricessds,savepercent,post_link,avilabilty)
               for (let l = 0; l < telegroup.length; l++) {
                 teleAutoPostChannel(finalAmznData,telegroup[l].groupname,amzn_data);
             }
             } else if(siteheadidsdng && siteheading && sitestrckpricessds && avilabilty ){
-              telePosted(token,siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
-              telePostedgujarat(token,siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
+//               telePosted(token,siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
+//               telePostedgujarat(token,siteheadidsdng,siteheading,sitestrckpricessds,post_link,avilabilty)
               for (let l = 0; l < telegroup.length; l++) {
                 teleAutoPostChannel(finalAmznData,telegroup[l].groupname,amzn_data);
             }
