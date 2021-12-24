@@ -14,19 +14,19 @@ var mysql  = require('mysql');
 // };
 
 
-// var db_config = {
-//   host     : 'sql6.freesqldatabase.com',
-//   user     : 'sql6431753',
-//   password : 'uw22phSVBd',
-//   database:'sql6431753'
-// };
-
 var db_config = {
   host     : 'sql6.freesqldatabase.com',
-  user     : 'sql6453992',
-  password : 'Wi6qLQrqdr',
-  database:'sql6453992'
+  user     : 'sql6460964',
+  password : 'HSl77PfFfD',
+  database:'sql6460964'
 };
+
+// var db_config = {
+//   host     : 'sql6.freesqldatabase.com',
+//   user     : 'sql6453992',
+//   password : 'Wi6qLQrqdr',
+//   database:'sql6453992'
+// };
 
 //- Create the connection variable
 var connection = mysql.createConnection(db_config);
