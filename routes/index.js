@@ -1103,19 +1103,24 @@ function whatsapp_posts1(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
 	for (let i = 0; i < arrayGroupNumber.length; i++) {
 	  var ggff = urlencodedd(AmazonMsg);
 	  if(ggff != 'null' && ggff != 'undefined' ){
-	  // let requestHeaders1 = {
-	  //   "Content-Type": "application/json",
-	  //   "accept": "application/json"
-	  // }
-    let form = new FormData();
-    form.append("number", arrayGroupNumber[i].id);
-    form.append("message", randomMonth + ggff);
+      let requestHeaders1 = {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+      }
+
+       let linkRequest1 = {
+          "number": arrayGroupNumber[i].id,
+          "message": randomMonth + ggff
+        }
+    // let form = new FormData();
+    // form.append("number", arrayGroupNumber[i].id);
+    // form.append("message", randomMonth + ggff);
 
 	  request({
-	    uri: "https://wpqrcode1.herokuapp.com/send-message",
+      uri: "https://wpqrcode1.herokuapp.com/send-message",
 	    method: "POST",
-	    body: form
-	    // headers: requestHeaders1
+	    body: JSON.stringify(linkRequest1),
+	    headers: requestHeaders1
 	  }, (err, response, body) => {
 		  console.log('sss',body);
 		  console.log('errrr',err);
@@ -1209,19 +1214,24 @@ function whatsapp_posts2(AmazonMsg,Amznapi,Amznphoneid,Amznprodid){
 for (let i = 0; i < arrayGroupNumber.length; i++) {
   var ggff = urlencodedd(AmazonMsg);
   if(ggff != 'null' && ggff != 'undefined' ){
-  // let requestHeaders1 = {
-  //   "Content-Type": "application/json",
-  //   "accept": "application/json"
-  // }
-  let form = new FormData();
-  form.append("number", arrayGroupNumber[i].id);
-  form.append("message", randomMonth + ggff);
+    let requestHeaders1 = {
+      "Content-Type": "application/json",
+      "accept": "application/json",
+    }
+
+     let linkRequest1 = {
+        "number": arrayGroupNumber[i].id,
+        "message": randomMonth + ggff
+      }
+  // let form = new FormData();
+  // form.append("number", arrayGroupNumber[i].id);
+  // form.append("message", randomMonth + ggff);
 
   request({
-    uri: "https://wpqrcode1.herokuapp.com/send-message",
+    uri: "https://wpqrcode2.herokuapp.com/send-message",
     method: "POST",
-    body: form
-    // headers: requestHeaders1
+    body: JSON.stringify(linkRequest1),
+    headers: requestHeaders1
   }, (err, response, body) => {
     console.log('sss',body);
     console.log('errrr',err);
