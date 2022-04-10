@@ -798,7 +798,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
             if(finalAmazon.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)){
               let finalIdList = JSON.parse(ListflagData.array_data).user;
               let finalPostList;
-             if(finalAmazon.match(/amzn.to/g)){
+             if(finalAmazon.match(/amzn.to/g) || finalAmazon.match(/amazon.in/g)){
               finalPostList = JSON.parse(ListflagData.amzn_tele_value).telenogroup;
              }else{
               finalPostList = JSON.parse(ListflagData.tele_values).telenogroup;
@@ -851,7 +851,7 @@ function postImageWidth(post_link,token,amzn_data,storeId,finalAmznData,telegrou
               if(finalAmazon.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)){
                 let finalIdList = JSON.parse(ListflagData.array_data).user;
                 let finalPostList;
-               if(finalAmazon.match(/amzn.to/g)){
+               if(finalAmazon.match(/amzn.to/g) || finalAmazon.match(/amazon.in/g)){
                 finalPostList = JSON.parse(ListflagData.amzn_tele_value).telenogroup;
                }else{
                 finalPostList = JSON.parse(ListflagData.tele_values).telenogroup;
